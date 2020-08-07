@@ -11,10 +11,9 @@ import ButtonLoginComponent from "./ButtonLoginComponent";
 import {FormErrors} from "./FormErrors";
 
 
-
 class FormRegisterComponent extends React.Component {
 
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
             email: '',
@@ -25,15 +24,18 @@ class FormRegisterComponent extends React.Component {
             formValid: false
         }
     }
+
     btnRes = () => {
-        this.setState({ email: "", password: ""})
+        this.setState({email: "", password: ""})
     }
 
     handleUserInput = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         this.setState({[name]: value},
-            () => { this.validateField(name, value) });
+            () => {
+                this.validateField(name, value)
+            });
     }
 
     validateField(fieldName, value) {
@@ -41,19 +43,20 @@ class FormRegisterComponent extends React.Component {
         let emailValid = this.state.emailValid;
         let passwordValid = this.state.passwordValid;
 
-        switch(fieldName) {
+        switch (fieldName) {
             case 'email':
                 emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
                 fieldValidationErrors.email = emailValid ? '' : 'Email не правильно введен';
                 break;
             case 'password':
                 passwordValid = value.length >= 6;
-                fieldValidationErrors.password = passwordValid ? '': 'Пароль слишком короткий';
+                fieldValidationErrors.password = passwordValid ? '' : 'Пароль слишком короткий';
                 break;
             default:
                 break;
         }
-        this.setState({formErrors: fieldValidationErrors,
+        this.setState({
+            formErrors: fieldValidationErrors,
             emailValid: emailValid,
             passwordValid: passwordValid
         }, this.validateForm);
@@ -64,7 +67,7 @@ class FormRegisterComponent extends React.Component {
     }
 
     errorClass(error) {
-        return(error.length === 0 ? '' : 'has-error');
+        return (error.length === 0 ? '' : 'has-error');
     }
 
 
@@ -96,7 +99,7 @@ class FormRegisterComponent extends React.Component {
                             />
                         </div>
                         <FildsetEmailComponent
-                            adress = {`email ${this.errorClass(this.state.formErrors.email)}`}
+                            adress={`email ${this.errorClass(this.state.formErrors.email)}`}
                             name2='Email'
                             type='text'
                             htmlFor='inputEmail4'
@@ -104,10 +107,10 @@ class FormRegisterComponent extends React.Component {
                             valueC={this.state.email}
                             onChangeC={this.handleUserInput}
                             ids="email"
-                            name = "email"
+                            name="email"
                         />
                         <div>
-                        <FormErrors formErrors={this.state.formErrors.email} />
+                            <FormErrors formErrors={this.state.formErrors.email}/>
                         </div>
                         <FildsetLoginComponent
                             name2='Логин'
@@ -116,20 +119,20 @@ class FormRegisterComponent extends React.Component {
                             placeholder='Логин'
                         />
                         <FildsetPasswordComponent
-                            adress = {`password ${this.errorClass(this.state.formErrors.password)}`}
+                            adress={`password ${this.errorClass(this.state.formErrors.password)}`}
                             name2='Пароль'
                             type='password'
                             htmlFor='inputPassword4'
                             valueC={this.state.password}
                             onChangeC={this.handleUserInput}
-                            ids = "password"
-                            name = "password"
+                            ids="password"
+                            name="password"
                         />
-                        <FormErrors formErrors={this.state.formErrors.password} />
+                        <FormErrors formErrors={this.state.formErrors.password}/>
                         <BtnComponent
                             btn="buttum flex"
                             nameBtn="Регистрация"
-                            disableB = {!this.state.formValid}
+                            disableB={!this.state.formValid}
                             btnA="btn btn-primary btn-lg active form_btn bttn"
                             btnB="btn btn-secondary btn-lg active form_buttun bttn"
                             res={this.btnRes}
@@ -143,7 +146,7 @@ class FormRegisterComponent extends React.Component {
 
                 </div>
                 <ButtonLoginComponent
-                    link = "Login"
+                    link="Login"
                     nameBtnRegister="Уже есть аккаунт? Вход"
                 />
             </div>
