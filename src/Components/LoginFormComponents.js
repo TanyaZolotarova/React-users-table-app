@@ -10,7 +10,7 @@ import FildsetEmailComponent from "./FildsetEmailComponent";
 
 class LoginFormComponents extends React.Component {
 
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
             email: '',
@@ -21,6 +21,7 @@ class LoginFormComponents extends React.Component {
             formValid: false
         }
     }
+
     btnRes = () => {
         this.setState({email: "", password: ""})
     }
@@ -29,7 +30,9 @@ class LoginFormComponents extends React.Component {
         const name = e.target.name;
         const value = e.target.value;
         this.setState({[name]: value},
-            () => { this.validateField(name, value) });
+            () => {
+                this.validateField(name, value)
+            });
     }
 
     validateField(fieldName, value) {
@@ -37,19 +40,20 @@ class LoginFormComponents extends React.Component {
         let emailValid = this.state.emailValid;
         let passwordValid = this.state.passwordValid;
 
-        switch(fieldName) {
+        switch (fieldName) {
             case 'email':
                 emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-                fieldValidationErrors.email = emailValid ? '' : ' не правильно введен';
+                fieldValidationErrors.email = emailValid ? '' : 'Email не правильно введен';
                 break;
             case 'password':
                 passwordValid = value.length >= 6;
-                fieldValidationErrors.password = passwordValid ? '': ' слишком короткий';
+                fieldValidationErrors.password = passwordValid ? '' : 'Пароль слишком короткий';
                 break;
             default:
                 break;
         }
-        this.setState({formErrors: fieldValidationErrors,
+        this.setState({
+            formErrors: fieldValidationErrors,
             emailValid: emailValid,
             passwordValid: passwordValid
         }, this.validateForm);
@@ -60,9 +64,8 @@ class LoginFormComponents extends React.Component {
     }
 
     errorClass(error) {
-        return(error.length === 0 ? '' : 'has-error');
+        return (error.length === 0 ? '' : 'has-error');
     }
-
 
 
     render() {
@@ -81,7 +84,7 @@ class LoginFormComponents extends React.Component {
 
 
                         <FildsetEmailComponent
-                            adress = {`email ${this.errorClass(this.state.formErrors.email)}`}
+                            adress={`email ${this.errorClass(this.state.formErrors.email)}`}
                             name2='Email'
                             type='text'
                             htmlFor='inputEmail4'
@@ -89,41 +92,43 @@ class LoginFormComponents extends React.Component {
                             valueC={this.state.email}
                             onChangeC={this.handleUserInput}
                             ids="email"
-                            name = "email"
+                            name="email"
                         />
 
 
                         <FildsetPasswordComponent
-                            adress = {`password ${this.errorClass(this.state.formErrors.password)}`}
+                            adress={`password ${this.errorClass(this.state.formErrors.password)}`}
                             name2='Пароль'
                             type='password'
                             htmlFor='inputPassword4'
                             valueC={this.state.password}
                             onChangeC={this.handleUserInput}
-                            ids = "password"
-                            name = "password"
+                            ids="password"
+                            name="password"
 
 
                         />
-                        <FormErrors formErrors={this.state.formErrors} />
+                        <FormErrors formErrors={this.state.formErrors}/>
 
-                        <BtnComponent
-                            btn="buttum flex"
-                            nameBtn="Вход"
-                            disableB = {!this.state.formValid}
-                            btnA="btn btn-primary btn-lg active form_btn bttn"
-                            btnB="btn btn-secondary btn-lg active form_buttun bttn"
-                            res={this.btnRes}
+                            <BtnComponent
+                                btn="buttum flex"
+                                nameBtn="Вход"
+
+                                disableB={!this.state.formValid}
+                                link="Home"
+                                btnA="btn btn-primary btn-lg active form_btn bttn"
+                                btnB="btn btn-secondary btn-lg active form_buttun bttn"
+                                res={this.btnRes}
 
 
-                        />
+                            />
 
 
                     </form>
 
                 </div>
                 <ButtonLoginComponent
-                    link = '/'
+                    link='/'
                     nameBtnRegister="Нет аккаунта? Вернуться в регистрацию"
                 />
             </div>

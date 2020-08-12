@@ -11,6 +11,7 @@ import ButtonLoginComponent from "./ButtonLoginComponent";
 import {FormErrors} from "./FormErrors";
 
 
+
 class FormRegisterComponent extends React.Component {
 
     constructor(props) {
@@ -29,12 +30,14 @@ class FormRegisterComponent extends React.Component {
         this.setState({email: "", password: ""})
     }
 
+
     handleUserInput = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         this.setState({[name]: value},
             () => {
                 this.validateField(name, value)
+
             });
     }
 
@@ -50,7 +53,7 @@ class FormRegisterComponent extends React.Component {
                 break;
             case 'password':
                 passwordValid = value.length >= 6;
-                fieldValidationErrors.password = passwordValid ? '' : 'Пароль слишком короткий';
+                fieldValidationErrors.password = passwordValid ? '' : 'Пароль не правильно введен, введите не меньше 6 символов ';
                 break;
             default:
                 break;
@@ -106,7 +109,6 @@ class FormRegisterComponent extends React.Component {
                             placeholder='Email'
                             valueC={this.state.email}
                             onChangeC={this.handleUserInput}
-                            ids="email"
                             name="email"
                         />
                         <div>

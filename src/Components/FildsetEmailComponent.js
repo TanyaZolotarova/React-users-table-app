@@ -18,7 +18,7 @@ class FildsetEmailComponent extends React.Component {
     const valueC = this.props.valueC;
     const onChangeC = this.props.onChangeC;
     const name = this.props.name;
-    const ids = this.props.ids;
+
 
     return (
 
@@ -29,7 +29,7 @@ class FildsetEmailComponent extends React.Component {
                     <legend className={'label_text'}><label htmlFor={htmlFor}>{name2}</label>
                     </legend>
                     <input type={type} className="form-control input_border form_input "
-                           placeholder={placeholder} required="required"  id={ids} name={name} value = {valueC}
+                           placeholder={placeholder} required="required"   name={name} value = {valueC}
                            onChange={onChangeC} />
 
             </fieldset>

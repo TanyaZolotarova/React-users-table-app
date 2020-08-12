@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.css';
+import {Link} from "react-router-dom";
 
 class BtnComponent extends React.Component {
     render() {
@@ -10,15 +11,16 @@ class BtnComponent extends React.Component {
         const nameBtn = this.props.nameBtn;
         const disableB = this.props.disableB;
         const res = this.props.res;
+        const link = this.props.link;
 
 
         return (
             <div className={btn}>
-
-                <button  className={btnA} disabled={disableB} aria-pressed="true"
-                        type={'submit'}>{nameBtn}</button>
-
-                <button  className={btnB}
+                <Link to={link}>
+                    <button className={btnA} disabled={disableB} aria-pressed="true"
+                            type={'submit'}>{nameBtn}</button>
+                </Link>
+                <button className={btnB}
                         aria-pressed="true" type={'reset'} onClick={res}>Сброс
                 </button>
 

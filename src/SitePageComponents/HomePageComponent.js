@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
 import {HomeIcon, PeopleIcon, OctofaceIcon, RocketIcon, HubotIcon} from '@primer/octicons-react'
+import { Stocks } from "/home/tanya/PhpstormProjects/untitled8/src/Stocks.js";
 
 
 class HomePageComponent extends React.Component {
@@ -103,76 +104,78 @@ class HomePageComponent extends React.Component {
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>lorem@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@TwBootstrap</td>
-                                <td>lorem@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>lorem@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>lorem@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>lorem@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">6</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>lorem@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">7</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>lorem@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">8</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>lorem@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">9</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>lorem@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">10</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>lorem@gmail.com</td>
-                            </tr>
+
+                            <Stocks />
+                            {/*<tr>*/}
+                            {/*    <th scope="row">1</th>*/}
+                            {/*    <td>Mark</td>*/}
+                            {/*    <td>Otto</td>*/}
+                            {/*    <td>@mdo</td>*/}
+                            {/*    <td>lorem@gmail.com</td>*/}
+                            {/*</tr>*/}
+                            {/*<tr>*/}
+                            {/*    <th scope="row">2</th>*/}
+                            {/*    <td>Mark</td>*/}
+                            {/*    <td>Otto</td>*/}
+                            {/*    <td>@TwBootstrap</td>*/}
+                            {/*    <td>lorem@gmail.com</td>*/}
+                            {/*</tr>*/}
+                            {/*<tr>*/}
+                            {/*    <th scope="row">3</th>*/}
+                            {/*    <td>Jacob</td>*/}
+                            {/*    <td>Thornton</td>*/}
+                            {/*    <td>@fat</td>*/}
+                            {/*    <td>lorem@gmail.com</td>*/}
+                            {/*</tr>*/}
+                            {/*<tr>*/}
+                            {/*    <th scope="row">4</th>*/}
+                            {/*    <td>Jacob</td>*/}
+                            {/*    <td>Thornton</td>*/}
+                            {/*    <td>@fat</td>*/}
+                            {/*    <td>lorem@gmail.com</td>*/}
+                            {/*</tr>*/}
+                            {/*<tr>*/}
+                            {/*    <th scope="row">5</th>*/}
+                            {/*    <td>Jacob</td>*/}
+                            {/*    <td>Thornton</td>*/}
+                            {/*    <td>@fat</td>*/}
+                            {/*    <td>lorem@gmail.com</td>*/}
+                            {/*</tr>*/}
+                            {/*<tr>*/}
+                            {/*    <th scope="row">6</th>*/}
+                            {/*    <td>Jacob</td>*/}
+                            {/*    <td>Thornton</td>*/}
+                            {/*    <td>@fat</td>*/}
+                            {/*    <td>lorem@gmail.com</td>*/}
+                            {/*</tr>*/}
+                            {/*<tr>*/}
+                            {/*    <th scope="row">7</th>*/}
+                            {/*    <td>Jacob</td>*/}
+                            {/*    <td>Thornton</td>*/}
+                            {/*    <td>@fat</td>*/}
+                            {/*    <td>lorem@gmail.com</td>*/}
+                            {/*</tr>*/}
+                            {/*<tr>*/}
+                            {/*    <th scope="row">8</th>*/}
+                            {/*    <td>Jacob</td>*/}
+                            {/*    <td>Thornton</td>*/}
+                            {/*    <td>@fat</td>*/}
+                            {/*    <td>lorem@gmail.com</td>*/}
+                            {/*</tr>*/}
+                            {/*<tr>*/}
+                            {/*    <th scope="row">9</th>*/}
+                            {/*    <td>Jacob</td>*/}
+                            {/*    <td>Thornton</td>*/}
+                            {/*    <td>@fat</td>*/}
+                            {/*    <td>lorem@gmail.com</td>*/}
+                            {/*</tr>*/}
+                            {/*<tr>*/}
+                            {/*    <th scope="row">10</th>*/}
+                            {/*    <td>Jacob</td>*/}
+                            {/*    <td>Thornton</td>*/}
+                            {/*    <td>@fat</td>*/}
+                            {/*    <td>lorem@gmail.com</td>*/}
+                            {/*</tr>*/}
 
                             </tbody>
                         </table>

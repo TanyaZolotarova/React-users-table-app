@@ -3,8 +3,18 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
   letter-spacing: 0.5px;
+  height: 100%;
+
 }
 
+.fon_page{
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 form{
   width: 600px;
   display: block;
@@ -120,6 +130,88 @@ text-align: center;
 
 }
 
+/*==================== PAGE - HOME ==============================================================================*/
+
+.container-fluid {
+  padding: 0 !important;
+}
+header{
+  margin-bottom: 100px;
+}
+
+header a{
+  color: rgba(255,255,255,.5)!important;
+}
+header a:hover{
+  color: rgba(255,255,255,.75)!important;
+}
+/*=====================================SITEBAR==================================================================*/
+
+
+
+.bg_color {
+  background-color: #35383A !important;
+  border-color: #35383A !important;
+
+}
+.bg_color:hover {
+  background-color: #565B61 !important;
+}
+
+.marg-top{
+  margin-top: 50px;
+}
+.margin-form{
+  margin-top: 50px;
+}
+.shadow{
+
+  box-shadow: 7px 7px 16px 7px rgba(0,0,0,0.75);
+}
+.main-marg{
+  margin-top: 55px;
+}
+.height-100{
+  height: 100%!important;
+}
+
+/*===================================NUM PAGE============================================*/
+.active_num{
+  border-color: #35383A!important;
+  background-color: #35383A!important;
+}
+
+.active_num:hover{
+  background-color: #565B61!important;
+}
+
+.num{
+  margin-top: 15px;
+
+}
+
+.num_color{
+  color: black!important;
+}
+
+.filter_button{
+  position: absolute;
+  width: 200px;
+  top: 5%;
+}
+
+.dropdown-item:hover{
+  background-color: #35383A;
+}
+.inp-style{
+  width: 100%;
+  border: 1px solid #cacaca;
+  padding: 5px;
+}
+
+
+
+
 
 .App {
   text-align: center;
@@ -159,3 +251,4 @@ text-align: center;
     transform: rotate(360deg);
   }
 }
+
