@@ -14,6 +14,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+  overflow-x: scroll;
 }
 form{
   width: 600px;
@@ -163,6 +164,14 @@ header a:hover{
 }
 .margin-form{
   margin-top: 50px;
+
+
+
+}
+
+.overflow{
+  overflow-x: scroll;
+  height: 100%;
 }
 .shadow{
 
@@ -177,17 +186,23 @@ header a:hover{
 
 /*===================================NUM PAGE============================================*/
 .active_num{
-  border-color: #35383A!important;
+  border-color: #cacaca!important;
   background-color: #35383A!important;
+  color: #fff;
 }
 
 .active_num:hover{
   background-color: #565B61!important;
+  color: #cacaca;
 }
 
 .num{
   margin-top: 15px;
 
+}
+.page-item.active .page-link {
+  background-color: #4e555b;
+  border-color: black;
 }
 
 .num_color{
