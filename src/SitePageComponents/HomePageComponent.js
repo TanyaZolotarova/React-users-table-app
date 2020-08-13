@@ -7,16 +7,15 @@ import {generateName, generateEmail, generateId} from "./RandomFunctions";
 
 class HomePageComponent extends React.Component {
 
-
     state = {
-        rows: [],
+        rows: this.generateRows(),
     };
 
-    componentDidMount() {
+    generateRows() {
         const amountOfRows = 100;
         const result = [];
 
-        for(let i =0; i < amountOfRows; i++){
+        for (let i = 0; i < amountOfRows; i++) {
             result.push({
                 id: generateId(),
                 name1: generateName(),
@@ -27,8 +26,10 @@ class HomePageComponent extends React.Component {
             })
         }
 
-        this.setState({rows: result})
-    }
+        return result;
+    };
+
+
 
     render() {
 

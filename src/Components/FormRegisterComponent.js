@@ -1,14 +1,14 @@
 import React from 'react';
 import '../App.css';
-import TitleTextComponent from "./TitleTextComponent";
-import FildsetNameComponent from "./FildsetNameComponent";
-import FildsetLastNameComponent from "./FildsetLastNameComponent";
-import FildsetEmailComponent from "./FildsetEmailComponent";
-import FildsetLoginComponent from "./FildsetLoginComponent";
-import FildsetPasswordComponent from "./FildsetPasswordComponent";
-import BtnComponent from "./BtnComponent";
-import ButtonLoginComponent from "./ButtonLoginComponent";
-import {FormErrors} from "./FormErrors";
+import TitleTextComponent from './TitleTextComponent';
+import FildsetNameComponent from './FildsetNameComponent';
+import FildsetLastNameComponent from './FildsetLastNameComponent';
+import FildsetEmailComponent from './FildsetEmailComponent';
+import FildsetLoginComponent from './FildsetLoginComponent';
+import FildsetPasswordComponent from './FildsetPasswordComponent';
+import BtnComponent from './BtnComponent';
+import ButtonLoginComponent from './ButtonLoginComponent';
+import {FormErrors} from './FormErrors';
 
 
 
@@ -115,7 +115,7 @@ class FormRegisterComponent extends React.Component {
                             <FormErrors formErrors={this.state.formErrors.email}/>
                         </div>
                         <FildsetLoginComponent
-                            
+
                             name2='Логин'
                             type='text'
                             htmlFor='username'
@@ -149,8 +149,8 @@ class FormRegisterComponent extends React.Component {
 
                 </div>
                 <ButtonLoginComponent
-                    link="Login"
-                    nameBtnRegister="Уже есть аккаунт? Вход"
+                    link='Login'
+                    nameBtnRegister='Уже есть аккаунт? Вход'
                 />
             </div>
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import '../App.css';
-import FildsetPasswordComponent from "./FildsetPasswordComponent";
-import TitleTextComponent from "./TitleTextComponent";
-import BtnComponent from "./BtnComponent";
-import ButtonLoginComponent from "./ButtonLoginComponent";
-import {FormErrors} from "./FormErrors";
-import FildsetEmailComponent from "./FildsetEmailComponent";
+import FildsetPasswordComponent from './FildsetPasswordComponent';
+import TitleTextComponent from './TitleTextComponent';
+import BtnComponent from './BtnComponent';
+import ButtonLoginComponent from './ButtonLoginComponent';
+import {FormErrors} from './FormErrors';
+import FildsetEmailComponent from './FildsetEmailComponent';
 
 
 class LoginFormComponents extends React.Component {
@@ -23,7 +23,7 @@ class LoginFormComponents extends React.Component {
     }
 
     btnRes = () => {
-        this.setState({email: "", password: ""})
+        this.setState({email: '', password: ''})
     }
 
     handleUserInput = (e) => {
@@ -91,8 +91,8 @@ class LoginFormComponents extends React.Component {
                             placeholder='Email'
                             valueC={this.state.email}
                             onChangeC={this.handleUserInput}
-                            ids="email"
-                            name="email"
+                            ids='email'
+                            name='email'
                         />
 
 
@@ -103,21 +103,21 @@ class LoginFormComponents extends React.Component {
                             htmlFor='inputPassword4'
                             valueC={this.state.password}
                             onChangeC={this.handleUserInput}
-                            ids="password"
-                            name="password"
+                            ids='password'
+                            name='password'
 
 
                         />
                         <FormErrors formErrors={this.state.formErrors}/>
 
                             <BtnComponent
-                                btn="buttum flex"
-                                nameBtn="Вход"
+                                btn='buttum flex'
+                                nameBtn='Вход'
 
                                 disableB={!this.state.formValid}
-                                link="Home"
-                                btnA="btn btn-primary btn-lg active form_btn bttn"
-                                btnB="btn btn-secondary btn-lg active form_buttun bttn"
+                                link='Home'
+                                btnA='btn btn-primary btn-lg active form_btn bttn'
+                                btnB='btn btn-secondary btn-lg active form_buttun bttn'
                                 res={this.btnRes}
 
 
@@ -129,7 +129,7 @@ class LoginFormComponents extends React.Component {
                 </div>
                 <ButtonLoginComponent
                     link='/'
-                    nameBtnRegister="Нет аккаунта? Вернуться в регистрацию"
+                    nameBtnRegister='Нет аккаунта? Вернуться в регистрацию'
                 />
             </div>
 

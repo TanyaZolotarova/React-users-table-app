@@ -1,36 +1,34 @@
 import React from 'react';
 
-
 class PaginationComponent extends React.Component {
+  render() {
+    const {
+      nextPage, prevPage, setPage, pagesCount, currentPage,
+    } = this.props;
 
+    const pageNumbers = [...Array(pagesCount)].map((item, index) => index + 1);
 
+    return (
 
+      <ul className="pagination pg-blue justify-content-center ">
+        <li className={`page-item ${pageNumbers.includes(currentPage - 1) ? '' : 'd-none'}`}>
+          <a className="page-link bg-dark text-light" onClick={() => prevPage()}>Previous</a>
+        </li>
 
-    render() {
-        const {nextPage, prevPage, setPage, pagesCount, currentPage} = this.props;
-
-        const pageNumbers = [...Array(pagesCount)].map((item, index) => index + 1);
-
-        return (
-
-            <ul className="pagination pg-blue justify-content-center ">
-                <li className={`page-item ${pageNumbers.includes(currentPage - 1) ? '' : 'd-none'}`}>
-                    <button className="page-link active_num" onClick={() => prevPage()}>Previous</button>
-                </li>
-
-                {
-                    pageNumbers.map((number) =>
-                        <li className={`page-item active_num ${currentPage === number ? 'active' : ''}`}>
-                            <button className="page-link " onClick={() => setPage(number)}>{number}</button>
-                        </li>)
+        {
+                    pageNumbers.map((number) => (
+                      <li className={`page-item ${currentPage === number ? 'active' : ''}`} key={number}>
+                        <a className="page-link" onClick={() => setPage(number)}>{number}</a>
+                      </li>
+                    ))
                 }
 
-                <li className={`page-item  ${pageNumbers.includes(currentPage + 1) ? '' : 'd-none'}`}>
-                    <button className="page-link active_num" onClick={() => nextPage()}>Next</button>
-                </li>
-            </ul>
-        )
-    }
+        <li className={`page-item ${pageNumbers.includes(currentPage + 1) ? '' : 'd-none'}`}>
+          <a className="page-link bg-dark text-light" onClick={() => nextPage()}>Next</a>
+        </li>
+      </ul>
+    );
+  }
 }
 
 export default PaginationComponent;

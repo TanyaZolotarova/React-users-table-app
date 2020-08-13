@@ -1,27 +1,25 @@
 import React from 'react';
 import './App.css';
-import FormRegisterComponent from "./Components/FormRegisterComponent";
-import LoginFormComponents from "./Components/LoginFormComponents";
-import HomePageComponent from "./SitePageComponents/HomePageComponent";
-import {BrowserRouter as Router, Route} from "react-router-dom";
-
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import FormRegisterComponent from './Components/FormRegisterComponent';
+import LoginFormComponents from './Components/LoginFormComponents';
+import HomePageComponent from './SitePageComponents/HomePageComponent';
 
 class App extends React.Component {
-    render() {
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <Route exact path="/" component={FormRegisterComponent} />
+        </div>
+        <div className="App">
+          <Route exact path="/login" component={LoginFormComponents} />
+        </div>
+        <Route exact path="/Home" component={HomePageComponent} />
 
-        return (
-            <Router>
-                <div className="App">
-                    <Route exact={true} path='/' component={FormRegisterComponent}/>
-                </div>
-                <div className="App">
-                    <Route exact={true} path='/login' component={LoginFormComponents}/>
-                </div>
-                <Route exact={true} path='/Home' component={HomePageComponent}/>
-
-            </Router>
-        );
-    }
+      </Router>
+    );
+  }
 }
 
 export default App;
