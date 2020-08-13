@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 class BtnComponent extends React.Component {
     render() {
@@ -16,9 +17,12 @@ class BtnComponent extends React.Component {
 
         return (
             <div className={btn}>
+
                 <Link to={link}>
                     <button className={btnA} disabled={disableB} aria-pressed="true"
-                            type={'submit'}>{nameBtn}</button>
+                            type={'submit'}>
+                        {nameBtn}
+                    </button>
                 </Link>
                 <button className={btnB}
                         aria-pressed="true" type={'reset'} onClick={res}>Сброс
@@ -27,8 +31,6 @@ class BtnComponent extends React.Component {
             </div>
 
         )
-
-
     }
 }
 

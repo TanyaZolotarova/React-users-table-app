@@ -4,6 +4,8 @@ import React from 'react';
 class PaginationComponent extends React.Component {
 
 
+
+
     render() {
         const {nextPage, prevPage, setPage, pagesCount, currentPage} = this.props;
 

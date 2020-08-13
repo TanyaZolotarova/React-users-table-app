@@ -3,11 +3,7 @@ import './App.css';
 import FormRegisterComponent from "./Components/FormRegisterComponent";
 import LoginFormComponents from "./Components/LoginFormComponents";
 import HomePageComponent from "./SitePageComponents/HomePageComponent";
-import {
-    BrowserRouter as Router,
-    Route
-} from "react-router-dom";
-
+import {BrowserRouter as Router, Route} from "react-router-dom";
 
 
 class App extends React.Component {
@@ -18,9 +14,10 @@ class App extends React.Component {
                 <div className="App">
                     <Route exact={true} path='/' component={FormRegisterComponent}/>
                 </div>
-
+                <div className="App">
                     <Route exact={true} path='/login' component={LoginFormComponents}/>
-                    <Route exact={true} path='/Home' component={HomePageComponent}/>
+                </div>
+                <Route exact={true} path='/Home' component={HomePageComponent}/>
 
             </Router>
         );
@@ -28,5 +25,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-

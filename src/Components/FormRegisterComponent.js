@@ -27,7 +27,7 @@ class FormRegisterComponent extends React.Component {
     }
 
     btnRes = () => {
-        this.setState({email: "", password: ""})
+        this.setState({email: '', password: ''})
     }
 
 
@@ -109,12 +109,13 @@ class FormRegisterComponent extends React.Component {
                             placeholder='Email'
                             valueC={this.state.email}
                             onChangeC={this.handleUserInput}
-                            name="email"
+                            name='email'
                         />
                         <div>
                             <FormErrors formErrors={this.state.formErrors.email}/>
                         </div>
                         <FildsetLoginComponent
+                            
                             name2='Логин'
                             type='text'
                             htmlFor='username'
@@ -127,16 +128,16 @@ class FormRegisterComponent extends React.Component {
                             htmlFor='inputPassword4'
                             valueC={this.state.password}
                             onChangeC={this.handleUserInput}
-                            ids="password"
-                            name="password"
+                            ids='password'
+                            name='password'
                         />
                         <FormErrors formErrors={this.state.formErrors.password}/>
                         <BtnComponent
-                            btn="buttum flex"
-                            nameBtn="Регистрация"
+                            btn='buttum flex'
+                            nameBtn='Регистрация'
                             disableB={!this.state.formValid}
-                            btnA="btn btn-primary btn-lg active form_btn bttn"
-                            btnB="btn btn-secondary btn-lg active form_buttun bttn"
+                            btnA='btn btn-primary btn-lg active form_btn bttn'
+                            btnB='btn btn-secondary btn-lg active form_buttun bttn'
                             res={this.btnRes}
 
 
