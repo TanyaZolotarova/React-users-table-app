@@ -3,7 +3,7 @@ import React from 'react';
 class PaginationComponent extends React.Component {
   render() {
     const {
-      nextPage, prevPage, setPage, pagesCount, currentPage,
+      setPage, pagesCount, currentPage,
     } = this.props;
 
     const pageNumbers = [...Array(pagesCount)].map((item, index) => index + 1);
@@ -12,7 +12,7 @@ class PaginationComponent extends React.Component {
 
       <ul className="pagination pg-blue justify-content-center ">
         <li className={`page-item ${pageNumbers.includes(currentPage - 1) ? '' : 'd-none'}`}>
-          <a className="page-link bg-dark text-light" onClick={() => prevPage()}>Previous</a>
+          <a className="page-link bg-dark text-light" onClick={() => setPage(currentPage - 1)}>Previous</a>
         </li>
 
         {
@@ -24,7 +24,7 @@ class PaginationComponent extends React.Component {
                 }
 
         <li className={`page-item ${pageNumbers.includes(currentPage + 1) ? '' : 'd-none'}`}>
-          <a className="page-link bg-dark text-light" onClick={() => nextPage()}>Next</a>
+          <a className="page-link bg-dark text-light" onClick={() => setPage(currentPage + 1)}>Next</a>
         </li>
       </ul>
     );

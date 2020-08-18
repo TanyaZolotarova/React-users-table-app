@@ -8,78 +8,94 @@ import FildsetLoginComponent from './FildsetLoginComponent';
 import FildsetPasswordComponent from './FildsetPasswordComponent';
 import BtnComponent from './BtnComponent';
 import ButtonLoginComponent from './ButtonLoginComponent';
-import {FormErrors} from './FormErrors';
+
+import {connect} from "react-redux";
+import {setErrors, setField, setLoggedIn, clearForm} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/registration.js";
 
 
 
 class FormRegisterComponent extends React.Component {
+    fields = {
+        username: '',
+        email: '',
+        surname: '',
+        login: '',
+        password:'',
+    };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: '',
-            formErrors: {email: '', password: ''},
-            emailValid: false,
-            passwordValid: false,
-            formValid: false
+
+    componentDidMount() {
+        this.props.clearForm(this.fields);
+    }
+
+
+
+    handleChange = ({target}) => {
+        this.props.setField(target)
+    };
+
+    submitUserRegistrationForm = (e) => {
+        e.preventDefault();
+        const errors = this.validateForm();
+        if (Object.keys(errors).length === 0) {
+            this.props.setLoggedIn(this.fields);
+        } else {
+            this.props.setErrors(errors);
         }
-    }
+    };
 
-    btnRes = () => {
-        this.setState({email: '', password: ''})
-    }
+    validateForm = () => {
+        let fields = this.props.fields;
+        let errors = {};
 
+        /* eslint-disable no-unused-expressions */
 
-    handleUserInput = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        this.setState({[name]: value},
-            () => {
-                this.validateField(name, value)
+        !fields["username"]
+            ? errors["username"] ="Пожалуйста, введите имя."
+            : !fields["username"].match('^[A-Za-zА-Яа-яЁё]{2,60}')
+            ? errors["username"] ="Пожалуйста, заполните поле правильно."
+            : null;
 
-            });
-    }
+        !fields["surname"]
+            ? errors["surname"]="Пожалуйста, введите фамилию."
+            : !fields["surname"].match('^[A-Za-zА-Яа-яЁё]{2,60}')
+            ? errors["surname"]="Фамилия может содержать только буквы."
+            : null;
 
-    validateField(fieldName, value) {
-        let fieldValidationErrors = this.state.formErrors;
-        let emailValid = this.state.emailValid;
-        let passwordValid = this.state.passwordValid;
+        !fields["email"]
+            ? errors["email"]="Пожалуйста, введите e-mail."
+            : !fields["email"].match('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')
+            ? errors["email"]="Напишите правильный e-mail."
+            : null;
 
-        switch (fieldName) {
-            case 'email':
-                emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-                fieldValidationErrors.email = emailValid ? '' : 'Email не правильно введен';
-                break;
-            case 'password':
-                passwordValid = value.length >= 6;
-                fieldValidationErrors.password = passwordValid ? '' : 'Пароль не правильно введен, введите не меньше 6 символов ';
-                break;
-            default:
-                break;
-        }
-        this.setState({
-            formErrors: fieldValidationErrors,
-            emailValid: emailValid,
-            passwordValid: passwordValid
-        }, this.validateForm);
-    }
+        !fields["login"]
+            ? errors["login"]="Пожалуйста, введите логин."
+            : !fields["login"].match('^[A-Za-zА-Яа-яЁё]{4,60}')
+            ? errors["login"]="Напишите правильный логин."
+            : null;
 
-    validateForm() {
-        this.setState({formValid: this.state.emailValid && this.state.passwordValid});
-    }
+        !fields["password"]
+            ? errors["password"]="Пожалуйста, введите пароль."
+            : !fields["password"].match('^[A-Za-zА-Яа-яЁё]{4,60}')
+            ? errors["password"]="Пароль слишком легкий."
+            : null;
 
-    errorClass(error) {
-        return (error.length === 0 ? '' : 'has-error');
-    }
+        return errors
+    };
 
-
+    resetForm = (e) => {
+        this.props.clearForm(this.fields);
+        e.preventDefault()
+    };
     render() {
+        const {fields, errors} = this.props;
         return (
             <div>
 
                 <div className={'container form_block'}>
-                    <form className={'bg-white'}>
+                    <form className={'bg-white'} autoComplete="off"
+                          id = "form1"
+                          onSubmit= {this.submitUserRegistrationForm}>
                         <TitleTextComponent
                             text='title_block'
                             textH1='Регистрация'
@@ -93,52 +109,69 @@ class FormRegisterComponent extends React.Component {
                                 type='text'
                                 htmlFor='firstName'
                                 placeholder='Имя'
+                                value={fields.username}
+                                onChange={this.handleChange}
                             />
+                            <div className="text-danger ml-3 errorMsg">{errors.username}</div>
+
                             <FildsetLastNameComponent
                                 name2='Фамилия'
                                 type='text'
                                 htmlFor='lastName'
                                 placeholder='Фамилия'
+                                value={fields.surname}
+                                onChange={this.handleChange}
                             />
+
+                            <div className="text-danger">{errors.surname}</div>
+
                         </div>
+
                         <FildsetEmailComponent
-                            adress={`email ${this.errorClass(this.state.formErrors.email)}`}
                             name2='Email'
                             type='text'
                             htmlFor='inputEmail4'
                             placeholder='Email'
-                            valueC={this.state.email}
-                            onChangeC={this.handleUserInput}
+                            value={fields.email}
+                            onChange={this.handleChange}
                             name='email'
                         />
-                        <div>
-                            <FormErrors formErrors={this.state.formErrors.email}/>
-                        </div>
+
+                        <div className="text-danger">{errors.email}</div>
+
+
                         <FildsetLoginComponent
 
                             name2='Логин'
                             type='text'
                             htmlFor='username'
                             placeholder='Логин'
+                            value={fields.login}
+                            onChange={this.handleChange}
                         />
+                        <div className="text-danger">{errors.login}</div>
+
+
                         <FildsetPasswordComponent
-                            adress={`password ${this.errorClass(this.state.formErrors.password)}`}
+
                             name2='Пароль'
                             type='password'
                             htmlFor='inputPassword4'
-                            valueC={this.state.password}
-                            onChangeC={this.handleUserInput}
+                            value={fields.password}
+                            onChange={this.handleChange}
                             ids='password'
                             name='password'
                         />
-                        <FormErrors formErrors={this.state.formErrors.password}/>
+
+                        <div className="text-danger">{errors.password}</div>
+
+
                         <BtnComponent
                             btn='buttum flex'
                             nameBtn='Регистрация'
-                            disableB={!this.state.formValid}
                             btnA='btn btn-primary btn-lg active form_btn bttn'
                             btnB='btn btn-secondary btn-lg active form_buttun bttn'
-                            res={this.btnRes}
+                            onClick={this.resetForm}
 
 
                         />
@@ -156,6 +189,10 @@ class FormRegisterComponent extends React.Component {
 
         )
     }
+
 }
 
-export default FormRegisterComponent;
+
+const mapStateToProps = state => ({ ...state.registration });
+
+export default connect(mapStateToProps, { setErrors, setField, setLoggedIn, clearForm })(FormRegisterComponent)
