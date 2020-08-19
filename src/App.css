@@ -131,6 +131,10 @@ text-align: center;
 
 }
 
+.form-row{
+  flex-wrap: inherit;
+}
+
 /*==================== PAGE - HOME ==============================================================================*/
 
 .container-fluid {
@@ -222,6 +226,15 @@ header a:hover{
   width: 100%;
   border: 1px solid #cacaca;
   padding: 5px;
+}
+
+.textarea_users{
+  color: #fff;
+  padding: 5px;
+}
+
+.border-input-users{
+  border: 1px solid #cacaca;
 }
 
 

@@ -47,12 +47,13 @@ class EditUserRowContainer extends React.Component {
                         </thead>
                         <tbody>
                         <tr>
-                            <td>
+                            <td className={"textarea_users"}>
                                 {this.state.row.id}
                             </td>
                             {['name1', 'name2', 'name3', 'email'].map((name) =>
                                 <td key={name}>
-                                    <textarea name={name} onChange={this.handleChange} value={this.state.row[name]} />
+                                    <input className={"bg-dark textarea_users border-input-users"} type={"text"} name={name} onChange={this.handleChange}
+                                           value={this.state.row[name]} />
                                 </td>
                             )}
                         </tr>

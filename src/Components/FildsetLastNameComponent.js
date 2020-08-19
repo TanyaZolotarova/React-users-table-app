@@ -14,7 +14,7 @@ class FildsetLastNameComponent extends React.Component {
 
     return (
 
-      <div className="form-group col-md-6">
+      <div className="form-group ">
         <fieldset className="form_border">
           <legend className="label_text">
             {' '}
