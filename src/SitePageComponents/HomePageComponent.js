@@ -7,27 +7,27 @@ import { connect } from 'react-redux';
 import { generateData } from '/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js';
 
 class HomePageComponent extends React.Component {
-  componentDidMount() {
-    this.props.generateData(this.generateRows());
-  }
-
-  generateRows() {
-    const amountOfRows = 100;
-    const result = [];
-
-    for (let i = 0; i < amountOfRows; i++) {
-      result.push({
-        id: generateId(),
-        name1: generateName(),
-        name2: generateName(),
-        name3: generateName(),
-        email: generateEmail(),
-        uniqueId: i,
-      });
-    }
-
-    return result;
-  }
+  // componentDidMount() {
+  //   this.props.generateData(this.generateRows());
+  // }
+  //
+  // generateRows() {
+  //   const amountOfRows = 100;
+  //   const result = [];
+  //
+  //   for (let i = 0; i < amountOfRows; i++) {
+  //     result.push({
+  //       id: generateId(),
+  //       name1: generateName(),
+  //       name2: generateName(),
+  //       name3: generateName(),
+  //       email: generateEmail(),
+  //       uniqueId: i,
+  //     });
+  //   }
+  //
+  //   return result;
+  // }
 
   render() {
     return (
@@ -36,7 +36,7 @@ class HomePageComponent extends React.Component {
 
         <HeaderMenuComponent />
 
-        <TableComponent data={this.generateRows()} />
+        <TableComponent data={this.props.generateUserRow}/>
 
       </div>
 
@@ -44,4 +44,15 @@ class HomePageComponent extends React.Component {
   }
 }
 
-export default connect(null, { generateData })(HomePageComponent);
+
+const mapStateToProps = state => {
+
+  console.log("state.rows.activeId", state.rows)
+  return { ...state.rows,
+    activeId: state.rows.activeId,
+    // generateUserRow: state.rows.generateUserRow,
+  };
+};
+
+
+export default connect(mapStateToProps, { generateData })(HomePageComponent)

@@ -111,7 +111,7 @@
 
 import React from 'react';
 import RowComponent from '/home/tanya/PhpstormProjects/untitled8/src/SitePageComponents/RowComponent.js';
-import PaginationComponent from "./PaginationComponent";
+import PaginationComponent from "/home/tanya/PhpstormProjects/untitled8/src/SitePageComponents/PaginationComponent.js";
 import {connect} from 'react-redux';
 import {updateFilteredRows, updatePage} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
 
