@@ -15,6 +15,8 @@ import {setErrors, setField, setLoggedIn, clearForm} from "/home/tanya/PhpstormP
 
 
 class FormRegisterComponent extends React.Component {
+
+
     fields = {
         username: '',
         email: '',
@@ -23,12 +25,9 @@ class FormRegisterComponent extends React.Component {
         password:'',
     };
 
-
     componentDidMount() {
         this.props.clearForm(this.fields);
-    }
-
-
+    };
 
     handleChange = ({target}) => {
         this.props.setField(target)
@@ -38,7 +37,7 @@ class FormRegisterComponent extends React.Component {
         e.preventDefault();
         const errors = this.validateForm();
         if (Object.keys(errors).length === 0) {
-            this.props.setLoggedIn(this.fields);
+            this.props.isLogged(this.fields);
         } else {
             this.props.setErrors(errors);
         }
@@ -87,7 +86,10 @@ class FormRegisterComponent extends React.Component {
         this.props.clearForm(this.fields);
         e.preventDefault()
     };
+
+
     render() {
+
         const {fields, errors} = this.props;
         return (
             <div>

@@ -3,7 +3,7 @@ import {EDIT_USER_ROW, GENERATE_DATA, UPDATE_FILTERED_ROWS, UPDATE_PAGE} from ".
 import {generateEmail, generateId, generateName} from "/home/tanya/PhpstormProjects/untitled8/src/SitePageComponents/RandomFunctions.js";
 
 
-
+//for getting data from reducer --> initial state
 
 function generateRows() {
   const amountOfRows = 100;
@@ -21,12 +21,15 @@ function generateRows() {
   }
 
   return result;
-};
+}
 
+//
 
 const generateUserRow = (state = generateRows(), action) => {
   switch (action.type) {
     case GENERATE_DATA:
+      return [...action.data];
+    case EDIT_USER_ROW:
       return [...action.data];
     default:
       return state;
@@ -36,6 +39,8 @@ const generateUserRow = (state = generateRows(), action) => {
 const updatedData = (state = [], action) => {
   switch (action.type) {
     case UPDATE_FILTERED_ROWS:
+      return [...action.data];
+    case EDIT_USER_ROW:
       return [...action.data];
     default:
       return state;
@@ -53,23 +58,11 @@ const page = (state = 1, action) => {
   }
 };
 
-const edit = (state = [], action) => {
-  switch (action.type) {
-    case EDIT_USER_ROW:
-      return [...action.data];
-    default:
-      return state;
-  }
-};
-
-
-
 
 export const userRowsReducer = combineReducers({
   updatedData,
   page,
-  edit,
-  generateUserRow
+  generateUserRow,
 });
 
 

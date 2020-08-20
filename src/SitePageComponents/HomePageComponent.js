@@ -47,10 +47,7 @@ class HomePageComponent extends React.Component {
 
 const mapStateToProps = state => {
 
-  console.log("state.rows.activeId", state.rows)
   return { ...state.rows,
-    activeId: state.rows.activeId,
-    // generateUserRow: state.rows.generateUserRow,
   };
 };
 
