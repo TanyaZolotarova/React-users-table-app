@@ -36,7 +36,9 @@ class HomePageComponent extends React.Component {
 
         <HeaderMenuComponent />
 
-        <TableComponent data={this.props.generateUserRow}/>
+        <TableComponent
+            data={this.props.generateUserRow}
+        />
 
       </div>
 
