@@ -7,27 +7,6 @@ import { connect } from 'react-redux';
 import { generateData } from '/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js';
 
 class HomePageComponent extends React.Component {
-  // componentDidMount() {
-  //   this.props.generateData(this.generateRows());
-  // }
-  //
-  // generateRows() {
-  //   const amountOfRows = 100;
-  //   const result = [];
-  //
-  //   for (let i = 0; i < amountOfRows; i++) {
-  //     result.push({
-  //       id: generateId(),
-  //       name1: generateName(),
-  //       name2: generateName(),
-  //       name3: generateName(),
-  //       email: generateEmail(),
-  //       uniqueId: i,
-  //     });
-  //   }
-  //
-  //   return result;
-  // }
 
   render() {
     return (
@@ -36,9 +15,9 @@ class HomePageComponent extends React.Component {
 
         <HeaderMenuComponent />
 
-        <TableComponent
-            data={this.props.generateUserRow}
-        />
+
+        <TableComponent data = {this.props.generateUserRow}/>
+
 
       </div>
 
@@ -49,9 +28,8 @@ class HomePageComponent extends React.Component {
 
 const mapStateToProps = state => {
 
-  return { ...state.rows,
-  };
+    return { ...state.rows,
+    };
 };
-
 
 export default connect(mapStateToProps, { generateData })(HomePageComponent)

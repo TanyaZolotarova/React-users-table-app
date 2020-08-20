@@ -248,12 +248,23 @@ header a:hover{
   align-items: center;
 }
 
+.id-user{
+  margin: 0 auto;
+}
+
 .user-h2{
   font-size: 20px;
   color: #ffffff;
   text-align: center;
   margin-bottom: 20px;
 }
+.user-title {
+  text-align: center;
+  font-weight: 800;
+  color: #35383A;
+  margin-bottom: 40px;
+}
+
 
 .label_text_user {
   color: #fff;
@@ -269,7 +280,13 @@ header a:hover{
 .delit{
   margin-right: 30px;
 }
-
+.user-add-btn{
+  height: 38px;
+  margin-left: 20px;
+}
+.sitebar-icons{
+  margin-right: 10px;
+}
 
 
 

@@ -1,27 +1,52 @@
 import React from 'react';
 import '../App.css';
-import {connect} from "react-redux";
-import {editUser, generateData} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
-
+import { connect } from 'react-redux';
+import { editUser, generateData } from '/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js';
+import {generateId} from "/home/tanya/PhpstormProjects/untitled8/src/SitePageComponents/RandomFunctions.js";
 
 
 
 class EditUserRowContainer extends React.Component {
-
     state = {
-        row: {},
+        row: {
+            id: '',
+            name1: '',
+            name2: '',
+            name3: '',
+            email: '',
+        },
         rowId: null,
     }
 
     componentDidMount() {
-
         const fields = this.props.generateUserRow;
         const {id} = this.props.match.params;
 
-        this.setState({row: fields[id], rowId: id});
-
-
+        if (id) {
+            this.setState({row: fields[id], rowId: parseInt(id)});
+        }
     }
+
+    // addUser = () => {
+    //
+    //     const fields = this.props.generateUserRow;
+    //     const {id} = this.props.match.params;
+    //
+    //     !this.props.match.params.id
+    //         ? this.setState({rowId: this.props.generateUserRow.length + 1, row: {
+    //             id: '',
+    //             name1: '',
+    //             name2: '',
+    //             name3: '',
+    //             email: '',
+    //             } })
+    //         : this.setState({row: fields[id], rowId: id});
+    //
+    //     console.log("this.state.rowId", this.state.rowId);
+    //
+    //     return this.state;
+    // };
+
     handleChange = (event) => {
         const {target} = event;
 
@@ -31,28 +56,43 @@ class EditUserRowContainer extends React.Component {
                 [target.name]: target.value,
             }
         });
-    }
+    };
 
     handleSave() {
         const {row, rowId} = this.state;
 
-        const result = this.props.generateUserRow;
-        result[rowId] = row;
+        if (rowId === null) {
+            row.id = generateId();
+        }
 
-        this.props.editUser(result);
+        const oldRows = this.props.generateUserRow;
+        const newRows = rowId === null
+            ? [row, ...oldRows] // when adding a new user
+            : oldRows.map((oldRow, index) => index === rowId ? row : oldRow); // when editing existing user
+
+        this.props.editUser(newRows);
         window.history.back();
     };
+
+
 
     render() {
         return (
             <div className='fon_page'>
                 <div className={'container form_block'}>
+                    <h2 className={"user-title"}> Редактирование данных пользователя </h2>
                     <form className={"bg-dark"} onSubmit={this.submitEdit}>
 
-
-                            <h2 className="user-h2">Редактирование данных пользователя </h2>
-
-
+                        <div className={"id-user"}>
+                        <label className="user-h2"> <strong> ID </strong>
+                            <span className="pt-3">
+                                {
+                                    this.state.row.id
+                                    // !this.state.row.id ? generateId() : this.state.row.id
+                                }
+                            </span>
+                        </label>
+                        </div>
                             {/*  === EDIT_FORM ===  */}
 
                         <fieldset className="fieldset border border-input-users">
@@ -113,18 +153,18 @@ class EditUserRowContainer extends React.Component {
                 </div>
                 <div className='d-flex justify-content-center mt-5'>
                     <button
-                        className='btn btn-success mr-5 bttn'
+                        className='btn btn-dark mr-5 '
                         type='button'
                         onClick={() => this.handleSave()}>
-                        Сохранить изменения
+                       Сохранить
                     </button>
 
                     <button
-                        className='btn btn-danger ml-5 bttn'
+                        className='btn btn-secondary ml-5 '
                         type='button'
                         onClick={() => window.history.back()}
                     >
-                        Вернуться назад
+                        Назад
                     </button>
 
                 </div>

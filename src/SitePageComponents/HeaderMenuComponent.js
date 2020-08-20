@@ -39,8 +39,8 @@ class HeaderMenuComponent extends React.Component {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <HubotIcon size={16} />
-                {' '}
+                <span className={"sitebar-icons"}> <HubotIcon size={16} /> </span>
+
                 Мой профиль
               </a>
               <div className="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
@@ -54,31 +54,31 @@ class HeaderMenuComponent extends React.Component {
         <div className="filter_button height-100">
           <div className="collapse height-100" id="collapseExample">
             <div className="card card-body height-100 bg-dark">
-              <ul className="nav flex-column">
+              <ul className="nav ">
                 <li className="nav-item">
 
                   <a className="nav-link active" href="#">
-                    <HomeIcon size={16} />
+                   <span className={"sitebar-icons"}><HomeIcon size={16} /></span>
                     Главная
                   </a>
                 </li>
 
                 <li className="nav-item">
                   <a className="nav-link active" href="#">
-                    <PeopleIcon size={16} />
-                    Пользователи
+                    <span className={"sitebar-icons"}> <PeopleIcon size={16} /> </span>
+                      Пользователи
                   </a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link active" href="#">
-                    <OctofaceIcon size={16} />
-                    Товары
+                    <span className={"sitebar-icons"}>  <OctofaceIcon size={16} /> </span>
+                      Товары
                   </a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link active" href="#">
-                    <RocketIcon size={16} />
-                    Заказы
+                    <span className={"sitebar-icons"}> <RocketIcon size={16} /> </span>
+                      Заказы
                   </a>
                 </li>
 

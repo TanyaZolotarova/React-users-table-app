@@ -1,5 +1,5 @@
 import {combineReducers} from "redux";
-import {EDIT_USER_ROW, GENERATE_DATA, UPDATE_FILTERED_ROWS, UPDATE_PAGE} from "../actions/row";
+import {EDIT_USER_ROW, GENERATE_DATA, UPDATE_FILTERED_ROWS, UPDATE_PAGE} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
 import {generateEmail, generateId, generateName} from "/home/tanya/PhpstormProjects/untitled8/src/SitePageComponents/RandomFunctions.js";
 
 
@@ -16,16 +16,15 @@ function generateRows() {
       name2: generateName(),
       name3: generateName(),
       email: generateEmail(),
-      uniqueId: i,
     })
   }
 
   return result;
 }
 
-//
+// //
 
-const generateUserRow = (state = generateRows(), action) => {
+const generateUserRow = (state = generateRows() , action) => {
   switch (action.type) {
     case GENERATE_DATA:
       return [...action.data];
@@ -36,7 +35,8 @@ const generateUserRow = (state = generateRows(), action) => {
   }
 };
 
-const updatedData = (state = [], action) => {
+
+const updatedData = (state = [] , action) => {
   switch (action.type) {
     case UPDATE_FILTERED_ROWS:
       return [...action.data];
@@ -53,6 +53,17 @@ const page = (state = 1, action) => {
       return action.page;
     case UPDATE_FILTERED_ROWS:
       return 1;
+    case EDIT_USER_ROW:
+      return [...action.data];
+    default:
+      return state;
+  }
+};
+
+const edit = (state = [], action) => {
+  switch (action.type) {
+    case EDIT_USER_ROW:
+      return [...action.data];
     default:
       return state;
   }
@@ -60,9 +71,10 @@ const page = (state = 1, action) => {
 
 
 export const userRowsReducer = combineReducers({
+  generateUserRow,
   updatedData,
   page,
-  generateUserRow,
+  edit,
 });
 
 
@@ -84,8 +96,8 @@ export const userRowsReducer = combineReducers({
 //             return state;
 //     }
 // };
-
-
+//
+//
 // const data = (state = [], action) => {
 //     switch (action.type) {
 //         case GENERATE_DATA:

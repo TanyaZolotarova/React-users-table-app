@@ -2,7 +2,9 @@ import React from 'react';
 import RowComponent from '/home/tanya/PhpstormProjects/untitled8/src/SitePageComponents/RowComponent.js';
 import PaginationComponent from "/home/tanya/PhpstormProjects/untitled8/src/SitePageComponents/PaginationComponent.js";
 import {connect} from 'react-redux';
-import {updateFilteredRows, updatePage} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
+import {generateData, updateFilteredRows, updatePage} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
+import {NavLink} from "react-router-dom";
+import {PlusIcon} from '@primer/octicons-react';
 
 class TableComponent extends React.Component {
 
@@ -52,8 +54,17 @@ class TableComponent extends React.Component {
 
                 <section className={"main-marg"}>
                     <div className={"container margin_form"}>
+
+                        <div className='flex'>
                 <input className="form-control inp-style border mb-3" id="myInput" type="text" placeholder="Отфильтровать..."
                        onKeyUp={this.searchFieldChanged} />
+                       <NavLink to={`/users/`} className='btn btn-dark rounded user-add-btn' >
+                                <span>
+                                <PlusIcon size={24} />
+                                </span>
+                            </NavLink>
+                        </div>
+
 
                 <table className="table table-bordered table-dark table-hover shadow" id='table1'>
                     <thead className="thead-dark ">
@@ -71,7 +82,7 @@ class TableComponent extends React.Component {
                         this.props.updatedData ?
                             this.props.updatedData
                                 .slice(this.indexOfFirstRow(), this.indexOfLastRow())
-                                .map((row) => <RowComponent key={row.uniqueId} row={row} />) : []
+                                .map((row, index) => <RowComponent key={index} row={row} index={index}  />) : []
                     }
                     </tbody>
 
@@ -95,5 +106,5 @@ const mapStateToProps = state => {
     return { ...state.rows };
 };
 export default connect(
-    mapStateToProps, { updateFilteredRows, updatePage }
+    mapStateToProps, { updateFilteredRows, updatePage, generateData }
 )(TableComponent);

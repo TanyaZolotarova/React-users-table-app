@@ -9,8 +9,8 @@ import FildsetPasswordComponent from './FildsetPasswordComponent';
 import BtnComponent from './BtnComponent';
 import ButtonLoginComponent from './ButtonLoginComponent';
 
-import {connect} from "react-redux";
-import {setErrors, setField, setLoggedIn, clearForm} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/registration.js";
+import { connect } from 'react-redux';
+import { setErrors, setField, setLoggedIn, clearForm } from '/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/registration.js';
 
 
 
@@ -95,9 +95,11 @@ class FormRegisterComponent extends React.Component {
             <div>
 
                 <div className={'container form_block'}>
+
                     <form className={'bg-white'} autoComplete="off"
                           id = "form1"
                           onSubmit= {this.submitUserRegistrationForm}>
+
                         <TitleTextComponent
                             text='title_block'
                             textH1='Регистрация'
@@ -114,6 +116,7 @@ class FormRegisterComponent extends React.Component {
                                 value={fields.username}
                                 onChange={this.handleChange}
                             />
+
                             <div className="text-danger ml-3 errorMsg">{errors.username}</div>
 
                             <FildsetLastNameComponent
@@ -151,6 +154,7 @@ class FormRegisterComponent extends React.Component {
                             value={fields.login}
                             onChange={this.handleChange}
                         />
+
                         <div className="text-danger">{errors.login}</div>
 
 
@@ -174,8 +178,6 @@ class FormRegisterComponent extends React.Component {
                             btnA='btn btn-primary btn-lg active form_btn bttn'
                             btnB='btn btn-secondary btn-lg active form_buttun bttn'
                             onClick={this.resetForm}
-
-
                         />
 
 
