@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
 import {connect} from "react-redux";
-import {generateData} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
+import {editUser, generateData} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
 
 
 
@@ -13,11 +13,14 @@ class EditUserRowContainer extends React.Component {
     }
 
     componentDidMount() {
-        const {id} = this.props.match.params;
-        const fields = this.props.generateUserRow;
-        this.setState({row: fields[id], rowId: id});
-    };
 
+        const fields = this.props.generateUserRow;
+        const {id} = this.props.match.params;
+
+        this.setState({row: fields[id], rowId: id});
+
+
+    }
     handleChange = (event) => {
         const {target} = event;
 
@@ -27,32 +30,31 @@ class EditUserRowContainer extends React.Component {
                 [target.name]: target.value,
             }
         });
-    };
+    }
 
-    //TODO: action for changing store
     handleSave() {
         const {row, rowId} = this.state;
+
         const result = this.props.generateUserRow;
         result[rowId] = row;
 
         this.props.editUser(result);
         window.history.back();
-    }
-
+    };
 
     render() {
         return (
             <div className='fon_page'>
                 <div className={'container form_block'}>
-                <form className={"bg-dark"} onSubmit= {this.submitEdit}>
+                    <form className={"bg-dark"} onSubmit={this.submitEdit}>
 
 
-                        <h2 className="user-h2">Редактирование данных пользователя  </h2>
+                            <h2 className="user-h2">Редактирование данных пользователя </h2>
 
 
-                    {/*  === EDIT_FORM ===  */}
+                            {/*  === EDIT_FORM ===  */}
 
-                    <fieldset className="fieldset border border-input-users">
+                        <fieldset className="fieldset border border-input-users">
                             <legend className="label_text_user ml-2">Логин</legend>
                             {['name1'].map((name) =>
                                 <td key={name}>
@@ -121,7 +123,7 @@ class EditUserRowContainer extends React.Component {
                         type='button'
                         onClick={() => window.history.back()}
                     >
-                        Отменить изменения
+                        Вернуться назад
                     </button>
 
                 </div>
@@ -132,8 +134,8 @@ class EditUserRowContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return { ...state.rows };
+    return {...state.rows};
 };
 
-export default connect(mapStateToProps, { generateData })(EditUserRowContainer)
+export default connect(mapStateToProps, {editUser, generateData})(EditUserRowContainer)
 

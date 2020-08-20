@@ -1,7 +1,7 @@
 export const GENERATE_DATA = '[table] generate user data in rows';
 export const UPDATE_FILTERED_ROWS = '[table] update filtered rows';
 export const UPDATE_PAGE = '[table] update page';
-export const EDIT_USER_ROW = '[table] edit user row';
+export const EDIT_USER_ROW = '[table] edit user row'
 
 
 
