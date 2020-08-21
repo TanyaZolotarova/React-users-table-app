@@ -1,3 +1,6 @@
+
+/*==========================================================================================================*/
+
 body {
   background: linear-gradient(to right, #3e2b96, #74ebd5);
   font-family: 'Roboto', sans-serif;
@@ -287,9 +290,19 @@ header a:hover{
 .sitebar-icons{
   margin-right: 10px;
 }
+.registrationField-input {
+  outline: none;
+  border: none;
+  font-size: 15px;
+  width: 200%;
+  box-shadow: none;
+}
 
-
-
+input:focus {
+  outline: 0!important;
+  outline-offset: 0!important;
+  box-shadow: none!important;
+}
 
 
 

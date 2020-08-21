@@ -4,7 +4,8 @@ import PaginationComponent from "/home/tanya/PhpstormProjects/untitled8/src/Site
 import {connect} from 'react-redux';
 import {generateData, updateFilteredRows, updatePage} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
 import {NavLink} from "react-router-dom";
-import {PlusIcon} from '@primer/octicons-react';
+import {PlusIcon, PersonIcon} from '@primer/octicons-react';
+import {usersSearchSelector} from '../Redux/selectors/users.selector';
 
 class TableComponent extends React.Component {
 
@@ -58,9 +59,10 @@ class TableComponent extends React.Component {
                         <div className='flex'>
                 <input className="form-control inp-style border mb-3" id="myInput" type="text" placeholder="Отфильтровать..."
                        onKeyUp={this.searchFieldChanged} />
-                       <NavLink to={`/users/`} className='btn btn-dark rounded user-add-btn' >
-                                <span>
-                                <PlusIcon size={24} />
+                       <NavLink to={`/users/`} className='btn btn-dark rounded user-add-btn flex' >
+                           <span><PersonIcon size={24} /></span>
+                           <span>
+                               <PlusIcon size={24} />
                                 </span>
                             </NavLink>
                         </div>
@@ -106,5 +108,5 @@ const mapStateToProps = state => {
     return { ...state.rows };
 };
 export default connect(
-    mapStateToProps, { updateFilteredRows, updatePage, generateData }
+    mapStateToProps, { updateFilteredRows, updatePage, usersSearchSelector}
 )(TableComponent);

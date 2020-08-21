@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
 import { NavLink } from 'react-router-dom';
-import { TrashIcon } from '@primer/octicons-react';
+
 
 class RowComponent extends React.Component {
   render() {
@@ -13,20 +13,20 @@ class RowComponent extends React.Component {
         <td>{row.name1}</td>
         <td>{row.name2}</td>
         <td>{row.name3}</td>
-        <td className="d-flex justify-content-between">
-          { row.email }
-
-          <div>
-
+        <td> { row.email }</td>
+        <td>
             <NavLink to={`/users/${index}`} className="btn btn-dark rounded ">
               <span>
                 edit
               </span>
             </NavLink>
-
-
-          </div>
         </td>
+
+
+
+
+
+
       </tr>
     );
   }

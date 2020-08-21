@@ -69,12 +69,17 @@ const edit = (state = [], action) => {
   }
 };
 
+export const filterText = (state = '', action)=>{
+  return state;
+}
+
 
 export const userRowsReducer = combineReducers({
   generateUserRow,
   updatedData,
   page,
   edit,
+  filterText,
 });
 
 

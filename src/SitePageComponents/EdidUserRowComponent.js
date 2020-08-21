@@ -27,25 +27,6 @@ class EditUserRowContainer extends React.Component {
         }
     }
 
-    // addUser = () => {
-    //
-    //     const fields = this.props.generateUserRow;
-    //     const {id} = this.props.match.params;
-    //
-    //     !this.props.match.params.id
-    //         ? this.setState({rowId: this.props.generateUserRow.length + 1, row: {
-    //             id: '',
-    //             name1: '',
-    //             name2: '',
-    //             name3: '',
-    //             email: '',
-    //             } })
-    //         : this.setState({row: fields[id], rowId: id});
-    //
-    //     console.log("this.state.rowId", this.state.rowId);
-    //
-    //     return this.state;
-    // };
 
     handleChange = (event) => {
         const {target} = event;
@@ -98,9 +79,9 @@ class EditUserRowContainer extends React.Component {
                         <fieldset className="fieldset border border-input-users">
                             <legend className="label_text_user ml-2">Логин</legend>
                             {['name1'].map((name) =>
-                                <td key={name}>
+                                <td key={name} className={"registrationField-input"}>
                                     <input
-                                        className="form-control form-control_user input_border form_input bg-dark "
+                                        className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
                                         onChange={this.handleChange}
                                         value={this.state.row[name]}
@@ -113,7 +94,7 @@ class EditUserRowContainer extends React.Component {
                             {['name2'].map((name) =>
                                 <td key={name}>
                                     <input
-                                        className="form-control form-control_user input_border form_input bg-dark "
+                                        className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
                                         onChange={this.handleChange}
                                         value={this.state.row[name]}
@@ -126,7 +107,7 @@ class EditUserRowContainer extends React.Component {
                             {['name3'].map((name) =>
                                 <td key={name}>
                                     <input
-                                        className="form-control form-control_user input_border form_input bg-dark "
+                                        className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
                                         onChange={this.handleChange}
                                         value={this.state.row[name]}
@@ -140,7 +121,7 @@ class EditUserRowContainer extends React.Component {
                             {['email'].map((name) =>
                                 <td key={name}>
                                     <input
-                                        className="form-control form-control_user input_border form_input bg-dark "
+                                        className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
                                         onChange={this.handleChange}
                                         value={this.state.row[name]}
