@@ -36,6 +36,8 @@ import {NavLink} from "react-router-dom";
 import {connect} from "react-redux";
 import '../App.css';
 import {deleteUser, editUser} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
+import { TrashIcon } from '@primer/octicons-react';
+
 
 class RowComponent extends React.Component {
 
@@ -72,7 +74,7 @@ class RowComponent extends React.Component {
                 <button onClick={this.handleDelete}  className='btn btn-sm btn-dark rounded ml-2'>
                     {/*// onClick={console.log(this.fields.length)}>*/}
                     <span className="material-icons icon-edit text-light">
-                    clear
+                  <TrashIcon size={18} />
                     </span>
                 </button>
             </tr>
