@@ -1,12 +1,12 @@
 import React from 'react';
 import '../App.css';
 import { connect } from 'react-redux';
-import { editUser, generateData } from '/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js';
+import {addUsersData, editUser} from '/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js';
 import {generateId} from "/home/tanya/PhpstormProjects/untitled8/src/SitePageComponents/RandomFunctions.js";
+import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/selectors/users.selector.js";
 
 
-
-class EditUserRowContainer extends React.Component {
+class EditUserRowComponent extends React.Component {
     state = {
         row: {
             id: '',
@@ -16,10 +16,12 @@ class EditUserRowContainer extends React.Component {
             email: '',
         },
         rowId: null,
-    }
+    };
 
     componentDidMount() {
-        const fields = this.props.generateUserRow;
+
+        const fields = this.props.users;
+
         const {id} = this.props.match.params;
 
         if (id) {
@@ -46,7 +48,7 @@ class EditUserRowContainer extends React.Component {
             row.id = generateId();
         }
 
-        const oldRows = this.props.generateUserRow;
+        const oldRows = this.props.users;
         const newRows = rowId === null
             ? [row, ...oldRows] // when adding a new user
             : oldRows.map((oldRow, index) => index === rowId ? row : oldRow); // when editing existing user
@@ -54,7 +56,6 @@ class EditUserRowContainer extends React.Component {
         this.props.editUser(newRows);
         window.history.back();
     };
-
 
 
     render() {
@@ -155,9 +156,12 @@ class EditUserRowContainer extends React.Component {
     };
 }
 
+
 const mapStateToProps = state => {
-    return {...state.rows};
+    return {
+        users: usersRawSelector(state),
+    };
 };
 
-export default connect(mapStateToProps, {editUser, generateData})(EditUserRowContainer)
+export default connect(mapStateToProps, { addUsersData, editUser })(EditUserRowComponent)
 

@@ -2,55 +2,35 @@ import React from 'react';
 import RowComponent from '/home/tanya/PhpstormProjects/untitled8/src/SitePageComponents/RowComponent.js';
 import PaginationComponent from "/home/tanya/PhpstormProjects/untitled8/src/SitePageComponents/PaginationComponent.js";
 import {connect} from 'react-redux';
-import {generateData, updateFilteredRows, updatePage} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
+import {addTextInInput, updateFilteredRows, updatePage, addUsersData} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
 import {NavLink} from "react-router-dom";
 import {PlusIcon, PersonIcon} from '@primer/octicons-react';
-import {usersSearchSelector} from '../Redux/selectors/users.selector';
+import {
+    currentPageSelector,
+    filterTextSelector,
+    getPagesCount,
+    usersPerPageSelector,
+    usersRawSelector,
+} from '../Redux/selectors/users.selector';
 
 class TableComponent extends React.Component {
-
-    rowsPerPage = 10;
-
-    componentDidMount() {
-        this.props.updateFilteredRows(this.props.data);
-    }
-
-    filterColumn = (inputFilter, column) => {
-        return column
-            .toString()
-            .toLowerCase()
-            .includes(inputFilter.toLowerCase());
-    };
 
 
     setPage = (number) => {
         this.props.updatePage(number);
     };
 
-    getPagesCount = () => {
-        return Math.ceil(this.props.updatedData.length / this.rowsPerPage);
-    };
-
     searchFieldChanged = (event) => {
         const {value: searchPhrase} = event.target;
-
-        const rowsFiltered = this.props.data.filter((row) => {
-            return Object.values(row)
-                .filter((column) => this.filterColumn(searchPhrase, column)).length;
-        });
-
-        this.props.updateFilteredRows(rowsFiltered);
+        this.props.addTextInInput(searchPhrase);
     };
 
-    indexOfLastRow = () => {
-        return this.props.page * this.rowsPerPage;
-    };
 
-    indexOfFirstRow = () => {
-        return (this.props.page * this.rowsPerPage) - this.rowsPerPage;
-    };
 
     render() {
+
+        const {result} =this.props;
+
         return (
 
                 <section className={"main-marg"}>
@@ -80,11 +60,10 @@ class TableComponent extends React.Component {
                     </thead>
 
                     <tbody>
+
                     {
-                        this.props.updatedData ?
-                            this.props.updatedData
-                                .slice(this.indexOfFirstRow(), this.indexOfLastRow())
-                                .map((row, index) => <RowComponent key={index} row={row} index={index}  />) : []
+                        Object.values(result)
+                            .map((row, index) => <RowComponent key={index} row={row} index={index} />)
                     }
                     </tbody>
 
@@ -93,8 +72,8 @@ class TableComponent extends React.Component {
                 <nav aria-label="Page Navigation" >
                     <PaginationComponent
                         setPage={this.setPage}
-                        pagesCount={this.getPagesCount()}
-                        currentPage={this.props.page}
+                        pagesCount={this.props.pageCount}
+                        currentPage={this.props.currentPage}
                     />
                 </nav>
                     </div>
@@ -104,9 +83,18 @@ class TableComponent extends React.Component {
     }
 }
 
+
 const mapStateToProps = state => {
-    return { ...state.rows };
+
+    return {
+        users: usersRawSelector(state),
+        filter: filterTextSelector(state),
+        result: usersPerPageSelector(state),
+        pageCount: getPagesCount(state),
+        currentPage: currentPageSelector(state),
+    };
 };
+
 export default connect(
-    mapStateToProps, { updateFilteredRows, updatePage, usersSearchSelector}
+    mapStateToProps, { updateFilteredRows, updatePage, addUsersData, addTextInInput, }
 )(TableComponent);

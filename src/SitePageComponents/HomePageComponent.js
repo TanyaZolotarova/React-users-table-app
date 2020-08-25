@@ -2,9 +2,10 @@ import React from 'react';
 import '../App.css';
 import HeaderMenuComponent from './HeaderMenuComponent';
 import TableComponent from './TableComponent';
-import { generateName, generateEmail, generateId } from './RandomFunctions';
 import { connect } from 'react-redux';
-import { generateData } from '/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js';
+import {generateData} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/helpers/users.js";
+import {addUsersData, editUser}  from '/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js';
+import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/selectors/users.selector.js";
 
 class HomePageComponent extends React.Component {
 
@@ -16,7 +17,7 @@ class HomePageComponent extends React.Component {
         <HeaderMenuComponent />
 
 
-        <TableComponent data = {this.props.generateUserRow}/>
+        <TableComponent />
 
 
       </div>
@@ -27,9 +28,9 @@ class HomePageComponent extends React.Component {
 
 
 const mapStateToProps = state => {
-
-    return { ...state.rows,
+    return {
+        users: usersRawSelector(state),
     };
 };
 
-export default connect(mapStateToProps, { generateData })(HomePageComponent)
+export default connect(mapStateToProps, { addUsersData, editUser })(HomePageComponent)

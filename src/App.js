@@ -7,8 +7,21 @@ import FormRegisterComponent from './Components/FormRegisterComponent';
 import LoginFormComponents from './Components/LoginFormComponents';
 import HomePageComponent from './SitePageComponents/HomePageComponent';
 import EditUserRowContainer from './SitePageComponents/EdidUserRowComponent';
+import {generateData} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/helpers/users.js";
+import {addUsersData} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
+import {connect} from "react-redux";
+
+
 
 class App extends React.Component {
+
+    constructor (props) {
+        super(props);
+        this.props.addUsersData(
+            generateData(100)
+        );
+    }
+
   render() {
     return (
 
@@ -31,4 +44,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(null, { addUsersData })(App)

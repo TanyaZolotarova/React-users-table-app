@@ -1,28 +1,72 @@
 import { createSelector } from 'reselect';
 
-const usersBaseSelector = (state) => state.rows;
+export const rowsPerPage = 20;
 
-const usersRawSelector = createSelector(
+export const usersBaseSelector = (state) => state.users;
+
+
+export const usersRawSelector = createSelector(
     usersBaseSelector,
-    (state)=> state.generateUserRowte
+    (state)=> state.rows
 );
-const filterTextSelector = createSelector(
+
+export const filterTextSelector = createSelector(
     usersBaseSelector,
     (state)=> state.filterText
 );
 
-const usersSelector = createSelector(
-    usersRawSelector,
-    (items) => {
-        return items.map((user)=>{
-            return {...user, name: 'test'};
-        });
-    }
-)
+export const pageSelector = createSelector(
+    usersBaseSelector,
+    (state) => state.page
+);
 
-export const usersSearchSelector = createSelector(
+
+export const usersSelector = createSelector(
     [usersRawSelector, filterTextSelector],
     (items, text) => {
-        return items.filter((user)=>user.name.indexOf(text) !== 0);
+        const filterColumn = (searchPhrase, column) => {
+            return column
+                .toString()
+                .toLowerCase()
+                .includes(searchPhrase.toLowerCase());
+        };
+
+        return (items || []).filter((row)=>{
+            return Object.values(row)
+                .filter((column) => filterColumn(text, column)).length;
+        });
     }
-)
+);
+
+export const getPagesCount = createSelector (
+    [usersSelector],
+    (items) => {
+        return Math.ceil(items.length / rowsPerPage);
+    }
+);
+
+export const currentPageSelector = createSelector(
+    [getPagesCount, pageSelector],
+    (count, page) => {
+        if(page > count) {
+            return 1
+        }
+        return page;
+    }
+);
+
+export const indexOfLastRow = createSelector(currentPageSelector, (page) => {
+    return page * rowsPerPage;
+});
+
+export const indexOfFirstRow = createSelector(currentPageSelector,  (page) => {
+    return (page * rowsPerPage) - rowsPerPage;
+});
+
+
+export const usersPerPageSelector = createSelector(
+    [usersSelector,indexOfLastRow, indexOfFirstRow],
+    (items, last, first) => {
+        return (items || []).slice(first, last);
+    }
+);

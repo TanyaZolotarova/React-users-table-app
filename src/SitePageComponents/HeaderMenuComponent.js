@@ -4,6 +4,9 @@ import {
   HomeIcon, HubotIcon, OctofaceIcon, PeopleIcon, RocketIcon,
 } from '@primer/octicons-react';
 
+
+
+
 class HeaderMenuComponent extends React.Component {
   render() {
     return (
@@ -39,7 +42,7 @@ class HeaderMenuComponent extends React.Component {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <span className={"sitebar-icons"}> <HubotIcon size={16} /> </span>
+                <span className={"sitebar-icons"}> <HubotIcon size={18} /> </span>
 
                 Мой профиль
               </a>
@@ -92,5 +95,8 @@ class HeaderMenuComponent extends React.Component {
     );
   }
 }
+
+
+
 
 export default HeaderMenuComponent;
