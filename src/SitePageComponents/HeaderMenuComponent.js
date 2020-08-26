@@ -7,8 +7,8 @@ import {
 
 
 
-class HeaderMenuComponent extends React.Component {
-  render() {
+const HeaderMenuComponent = () => {
+
     return (
 
       <header className="container-fluid">
@@ -93,7 +93,7 @@ class HeaderMenuComponent extends React.Component {
       </header>
 
     );
-  }
+
 }
 
 

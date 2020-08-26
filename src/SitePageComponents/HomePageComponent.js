@@ -7,9 +7,9 @@ import {generateData} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/hel
 import {addUsersData, editUser}  from '/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js';
 import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/selectors/users.selector.js";
 
-class HomePageComponent extends React.Component {
+const HomePageComponent = () => {
 
-  render() {
+
     return (
 
       <div className="fon_page">
@@ -23,7 +23,7 @@ class HomePageComponent extends React.Component {
       </div>
 
     );
-  }
+
 }
 
 

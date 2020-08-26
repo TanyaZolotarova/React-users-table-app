@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useEffect, useState} from 'react';
 import '../App.css';
 import { connect } from 'react-redux';
 import {addUsersData, editUser} from '/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js';
@@ -6,72 +6,101 @@ import {generateId} from "/home/tanya/PhpstormProjects/untitled8/src/SitePageCom
 import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/selectors/users.selector.js";
 
 
-class EditUserRowComponent extends React.Component {
-    state = {
-        row: {
+
+
+    const EditUserRowComponent = ({users, match, editUser}) => {
+
+        const [row, setRow] = useState({
             id: '',
             name1: '',
             name2: '',
             name3: '',
             email: '',
-        },
-        rowId: null,
-    };
-
-    componentDidMount() {
-
-        const fields = this.props.users;
-
-        const {id} = this.props.match.params;
-
-        if (id) {
-            this.setState({row: fields[id], rowId: parseInt(id)});
-        }
-    }
-
-
-    handleChange = (event) => {
-        const {target} = event;
-
-        this.setState({
-            row: {
-                ...this.state.row,
-                [target.name]: target.value,
-            }
         });
-    };
 
-    handleSave() {
-        const {row, rowId} = this.state;
+        const [rowId, setRowId] = useState( null);
 
-        if (rowId === null) {
-            row.id = generateId();
-        }
+        const [errors, setErrors] = useState('');
 
-        const oldRows = this.props.users;
-        const newRows = rowId === null
-            ? [row, ...oldRows] // when adding a new user
-            : oldRows.map((oldRow, index) => index === rowId ? row : oldRow); // when editing existing user
+        useEffect(() => {
 
-        this.props.editUser(newRows);
-        window.history.back();
-    };
+            const fields = users;
+            const {id} = match.params;
 
 
-    render() {
+            if (id) {
+                setRow( fields[id] );
+                setRowId(parseInt(id));
+            }
+
+        }, []);
+
+
+        const handleChange = (event) => {
+            const {target} = event;
+            setRow( {...row, [target.name]: target.value}
+            )
+        };
+
+
+        const handleSave = () => {
+
+            const errors = validate();
+
+            if (Object.keys(errors).length === 0) {
+
+                if (rowId === null) {
+                    row.id = generateId();
+                }
+
+                const oldRows = users;
+                const newRows = rowId === null
+                    ? [row, ...oldRows] // when adding a new user
+                    : oldRows.map((oldRow, index) => index === rowId ? row : oldRow); // when editing existing user
+
+                editUser(newRows);
+                window.history.back();
+            }  else {
+                setErrors( errors );
+            }} ;
+
+        const validate = () => {
+            let rows = row;
+            let errors = {};
+
+            const editNames = new RegExp("^[A-Za-zА-Яа-яЁё]{4,60}");
+            const editEmail = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')
+
+            if (!editNames.exec(rows.name1)){
+                errors.name1 = "Введите правильный логин.";
+            }
+
+            if (!editNames.exec(rows.name2)) {
+                errors.name2 = "Введите правильное имя.";
+            }
+
+            if (!editNames.exec(rows.name3)) {
+                errors.name3 = "Введите правильную фамилию.";
+            }
+
+            if (!editEmail.exec(rows.email)) {
+                errors.email = "Введите правильный e-mail.";
+            }
+
+            return errors
+        };
+
+
         return (
             <div className='fon_page'>
                 <div className={'container form_block'}>
                     <h2 className={"user-title"}> Редактирование данных пользователя </h2>
-                    <form className={"bg-dark"} onSubmit={this.submitEdit}>
+                    <form className={"bg-dark"} >
 
                         <div className={"id-user"}>
                         <label className="user-h2"> <strong> ID </strong>
                             <span className="pt-3">
-                                {
-                                    this.state.row.id
-                                    // !this.state.row.id ? generateId() : this.state.row.id
-                                }
+                                {row.id}
                             </span>
                         </label>
                         </div>
@@ -84,7 +113,7 @@ class EditUserRowComponent extends React.Component {
                                     <input
                                         className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
-                                        onChange={this.handleChange}
+                                        onChange={handleChange}
                                         value={this.state.row[name]}
                                     />
                                 </td>)}
@@ -97,8 +126,8 @@ class EditUserRowComponent extends React.Component {
                                     <input
                                         className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
-                                        onChange={this.handleChange}
-                                        value={this.state.row[name]}
+                                        onChange={handleChange}
+                                        value={row[name]}
                                     />
                                 </td>)}
                         </fieldset>
@@ -110,8 +139,8 @@ class EditUserRowComponent extends React.Component {
                                     <input
                                         className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
-                                        onChange={this.handleChange}
-                                        value={this.state.row[name]}
+                                        onChange={handleChange}
+                                        value={row[name]}
                                     />
                                 </td>)}
 
@@ -124,8 +153,8 @@ class EditUserRowComponent extends React.Component {
                                     <input
                                         className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
-                                        onChange={this.handleChange}
-                                        value={this.state.row[name]}
+                                        onChange={handleChange}
+                                        value={row[name]}
                                     />
                                 </td>)}
                         </fieldset>
@@ -137,7 +166,7 @@ class EditUserRowComponent extends React.Component {
                     <button
                         className='btn btn-dark mr-5 '
                         type='button'
-                        onClick={() => this.handleSave()}>
+                        onClick={() => handleSave()}>
                        Сохранить
                     </button>
 
@@ -153,7 +182,7 @@ class EditUserRowComponent extends React.Component {
 
             </div>
         )
-    };
+
 }
 
 
