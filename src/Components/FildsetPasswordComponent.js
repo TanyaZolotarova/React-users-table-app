@@ -1,15 +1,7 @@
 import React from 'react';
 import '../App.css';
 
-class FildsetPasswordComponent extends React.Component {
-  render() {
-    const { name } = this.props;
-    const { type } = this.props;
-    const { htmlFor } = this.props;
-    const { valueC } = this.props;
-    const { onChangeC } = this.props;
-    const { name2 } = this.props;
-    const { ids } = this.props;
+const FildsetPasswordComponent = ({ name, type, htmlFor,  valueC, onChangeC, name2, ids }) => {
 
     return (
 
@@ -33,7 +25,7 @@ class FildsetPasswordComponent extends React.Component {
       </div>
 
     );
-  }
+
 }
 
 export default FildsetPasswordComponent;

@@ -1,13 +1,15 @@
 import {combineReducers} from "redux";
-import {EDIT_USER_ROW, GENERATE_DATA, UPDATE_FILTERED_ROWS, UPDATE_PAGE, DELETE_USER_ROW, GET_TEXT} from "../actions/row";
+import {EDIT_USER_ROW, GENERATE_DATA, UPDATE_FILTERED_ROWS, UPDATE_PAGE, GET_TEXT} from "../actions/row";
 
 
 const rows = (state = [], action) => {
   switch (action.type) {
     case GENERATE_DATA:
-      return [...action.data || []];
     case EDIT_USER_ROW:
-      return [...action.data || []];
+      return [...action.data || []].map((item, index) => {
+        item.idx = index;
+        return item;
+      });
     default:
       return state;
   }
@@ -20,9 +22,6 @@ const page = (state = 1, action) => {
       return action.page;
     case UPDATE_FILTERED_ROWS:
       return 1;
-      // case EDIT_USER_ROW:
-      // // case DELETE_USER_ROW:
-      //     return [...action.data];
     default:
       return state;
   }

@@ -1,13 +1,9 @@
 import React from 'react';
 import '../App.css';
 
-class TitleTextComponent extends React.Component {
-  render() {
-    const { text } = this.props;
-    const { textH1 } = this.props;
-    const { textH2 } = this.props;
+const TitleTextComponent = ({text, textH1, textH2}) =>{
 
-    return (
+return (
 
       <div className={text}>
         <h1>{textH1}</h1>
@@ -16,7 +12,7 @@ class TitleTextComponent extends React.Component {
       </div>
 
     );
-  }
+
 }
 
 export default TitleTextComponent;

@@ -1,7 +1,7 @@
 import {generateEmail, generateId, generateName} from "/home/tanya/PhpstormProjects/untitled8/src/SitePageComponents/RandomFunctions.js";
 
 export const generateData = (amountOfRows = 100) => {
-    // const amountOfRows = 100;
+
     const result = [];
 
     for (let i = 0; i < amountOfRows; i++) {

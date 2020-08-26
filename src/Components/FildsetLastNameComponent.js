@@ -1,16 +1,8 @@
 import React from 'react';
 import '../App.css';
 
-class FildsetLastNameComponent extends React.Component {
-  render() {
-    const { name } = this.props;
-    const { type } = this.props;
-    const { htmlFor } = this.props;
-    const { placeholder } = this.props;
-    const { valueC } = this.props;
-    const { onChangeC } = this.props;
-    const { name2 } = this.props;
-    const { ids } = this.props;
+const FildsetLastNameComponent = ({ name, type, htmlFor, placeholder, valueC, onChangeC, name2, ids }) => {
+
 
     return (
 
@@ -35,7 +27,7 @@ class FildsetLastNameComponent extends React.Component {
       </div>
 
     );
-  }
+
 }
 
 export default FildsetLastNameComponent;

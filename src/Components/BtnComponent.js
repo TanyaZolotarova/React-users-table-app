@@ -2,15 +2,7 @@ import React from 'react';
 import '../App.css';
 import { Link } from 'react-router-dom';
 
-class BtnComponent extends React.Component {
-  render() {
-    const { btn } = this.props;
-    const { btnA } = this.props;
-    const { btnB } = this.props;
-    const { nameBtn } = this.props;
-    const { disableB } = this.props;
-    const { res } = this.props;
-    const { link } = this.props;
+const BtnComponent = ({ btn, btnA, btnB, nameBtn, disableB, res, link}) => {
 
     return (
       <div className={btn}>
@@ -35,9 +27,8 @@ class BtnComponent extends React.Component {
         </button>
 
       </div>
-
-    );
-  }
+    )
 }
+
 
 export default BtnComponent;

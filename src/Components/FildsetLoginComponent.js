@@ -1,18 +1,9 @@
 import React from 'react';
 import '../App.css';
 
-class FildsetLoginComponent extends React.Component {
-  render() {
-    const { name } = this.props;
-    const { type } = this.props;
-    const { htmlFor } = this.props;
-    const { placeholder } = this.props;
-    const { valueC } = this.props;
-    const { onChangeC } = this.props;
-    const { name2 } = this.props;
-    const { ids } = this.props;
+const FildsetLoginComponent = ({ name, type, htmlFor, placeholder, valueC, onChangeC, name2, ids }) => {
 
-    return (
+  return (
 
       <div className="form-group">
         <fieldset className="form_border">
@@ -36,7 +27,7 @@ class FildsetLoginComponent extends React.Component {
       </div>
 
     );
-  }
+
 }
 
 export default FildsetLoginComponent;

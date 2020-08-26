@@ -1,88 +1,75 @@
 import React from 'react';
 import RowComponent from '/home/tanya/PhpstormProjects/untitled8/src/SitePageComponents/RowComponent.js';
-import PaginationComponent from "/home/tanya/PhpstormProjects/untitled8/src/SitePageComponents/PaginationComponent.js";
+import PaginationComponent from "./PaginationComponent";
 import {connect} from 'react-redux';
 import {addTextInInput, updateFilteredRows, updatePage, addUsersData} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { currentPageSelector, filterTextSelector, getPagesCount, usersPerPageSelector, usersRawSelector, } from "/home/tanya/PhpstormProjects/untitled8/src/Redux/selectors/users.selector.js";
 import {PlusIcon, PersonIcon} from '@primer/octicons-react';
-import {
-    currentPageSelector,
-    filterTextSelector,
-    getPagesCount,
-    usersPerPageSelector,
-    usersRawSelector,
-} from '../Redux/selectors/users.selector';
 
-class TableComponent extends React.Component {
+const TableComponent = ({updatePage, addTextInInput, result, pageCount, currentPage }) => {
 
-
-    setPage = (number) => {
-        this.props.updatePage(number);
+    const setPage = (number) => {
+        updatePage(number);
     };
 
-    searchFieldChanged = (event) => {
+    const searchFieldChanged = (event) => {
         const {value: searchPhrase} = event.target;
-        this.props.addTextInInput(searchPhrase);
+        addTextInInput(searchPhrase);
     };
 
+    return (
+        <>
+            <section className={"main-marg"}>
+                                <div className={"container margin_form"}>
 
 
-    render() {
+                                    <div className='flex'>
+                                                                 <input className="form-control inp-style border mb-3" id="myInput" type="text"
+                                                                      placeholder="Отфильтровать..."
+                                                                      onKeyUp={searchFieldChanged}/>
+                                                              <NavLink to={`/users/`} className='btn btn-dark rounded user-add-btn flex'>
+                                                                  <span><PersonIcon size={24}/></span>
+                                                                 <span>
+                                                                   <PlusIcon size={24}/>
+                                                                    </span>
+                                                            </NavLink>
+                                                        </div>
 
-        const {result} =this.props;
+            <table className="table table-bordered table-dark table-hover shadow" id='table1'>
+                                       <thead className="thead-dark ">
+                                    <tr>
+                                          <th scope="col">ID</th>
+                                           <th scope="col">Логин</th>
+                                            <th scope="col">Имя</th>
+                                           <th scope="col">Фамилия</th>
+                                            <th scope="col">E-mail</th>
+                                      </tr>
+                                 </thead>
 
-        return (
+                <tbody>
 
-                <section className={"main-marg"}>
-                    <div className={"container margin_form"}>
+                {
+                    Object.values(result)
+                        .map((row, index) => <RowComponent key={index} row={row} index={row.idx} />)
+                }
 
-                        <div className='flex'>
-                <input className="form-control inp-style border mb-3" id="myInput" type="text" placeholder="Отфильтровать..."
-                       onKeyUp={this.searchFieldChanged} />
-                       <NavLink to={`/users/`} className='btn btn-dark rounded user-add-btn flex' >
-                           <span><PersonIcon size={24} /></span>
-                           <span>
-                               <PlusIcon size={24} />
-                                </span>
-                            </NavLink>
-                        </div>
+                </tbody>
 
+            </table>
 
-                <table className="table table-bordered table-dark table-hover shadow" id='table1'>
-                    <thead className="thead-dark ">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Логин</th>
-                        <th scope="col">Имя</th>
-                        <th scope="col">Фамилия</th>
-                        <th scope="col">E-mail</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-
-                    {
-                        Object.values(result)
-                            .map((row, index) => <RowComponent key={index} row={row} index={index} />)
-                    }
-                    </tbody>
-
-                </table>
-
-                <nav aria-label="Page Navigation" >
-                    <PaginationComponent
-                        setPage={this.setPage}
-                        pagesCount={this.props.pageCount}
-                        currentPage={this.props.currentPage}
-                    />
-                </nav>
-                    </div>
-                </section>
-
-        );
-    }
+            <nav aria-label="Page Navigation" >
+                <PaginationComponent
+                    setPage={setPage}
+                    pagesCount={pageCount}
+                    currentPage={currentPage}
+                />
+            </nav>
+                                </div>
+            </section>
+        </>
+    );
 }
-
 
 const mapStateToProps = state => {
 

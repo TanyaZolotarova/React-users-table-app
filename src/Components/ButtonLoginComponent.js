@@ -2,12 +2,10 @@ import React from 'react';
 import '../App.css';
 import { Link } from 'react-router-dom';
 
-class ButtonLoginComponent extends React.Component {
-  render() {
-    const { nameBtnRegister } = this.props;
-    const { link } = this.props;
+const ButtonLoginComponent = ({ nameBtnRegister , link  }) => {
 
-    return (
+
+return (
 
       <Link to={link}>
         <button className="btnLogin" type="btn">{nameBtnRegister}</button>
@@ -15,6 +13,6 @@ class ButtonLoginComponent extends React.Component {
 
     );
   }
-}
+
 
 export default ButtonLoginComponent;

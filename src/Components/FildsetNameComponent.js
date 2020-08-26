@@ -1,15 +1,7 @@
 import React from 'react';
 import '../App.css';
 
-class FildsetNameComponent extends React.Component {
-  render() {
-    const { name } = this.props;
-    const { type } = this.props;
-    const { htmlFor } = this.props;
-    const { placeholder } = this.props;
-    const { valueC } = this.props;
-    const { onChangeC } = this.props;
-    const { name2 } = this.props;
+const FildsetNameComponent = ({ name, type, htmlFor, placeholder, valueC, onChangeC, name2}) => {
 
     return (
 
@@ -34,7 +26,7 @@ class FildsetNameComponent extends React.Component {
       </div>
 
     );
-  }
+
 }
 
 export default FildsetNameComponent;

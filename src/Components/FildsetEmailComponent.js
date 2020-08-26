@@ -1,17 +1,9 @@
 import React from 'react';
 import '../App.css';
 
-class FildsetEmailComponent extends React.Component {
-  render() {
-    const name2 = this.props.name;
-    const { type } = this.props;
-    const { htmlFor } = this.props;
-    const { placeholder } = this.props;
-    const { valueC } = this.props;
-    const { onChangeC } = this.props;
-    const { name } = this.props;
+const FildsetEmailComponent = ({name2, type, htmlFor, placeholder, valueC, onChangeC, name }) => {
 
-    return (
+  return (
 
       <div className="form-group">
 
@@ -35,7 +27,7 @@ class FildsetEmailComponent extends React.Component {
       </div>
 
     );
-  }
+
 }
 
 export default FildsetEmailComponent;
