@@ -114,10 +114,11 @@ import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux
                                         className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
                                         onChange={handleChange}
-                                        value={this.state.row[name]}
+                                        value={row[name]}
                                     />
                                 </td>)}
                         </fieldset>
+                        <div className="text-danger">{errors.name1}</div>
 
                         <fieldset className="fieldset border border-input-users">
                             <legend className="label_text_user ml-2">Имя</legend>
@@ -131,6 +132,7 @@ import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux
                                     />
                                 </td>)}
                         </fieldset>
+                        <div className="text-danger">{errors.name2}</div>
 
                         <fieldset className="fieldset border border-input-users">
                             <legend className="label_text_user ml-2">Фамилия</legend>
@@ -145,6 +147,7 @@ import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux
                                 </td>)}
 
                         </fieldset>
+                        <div className="text-danger">{errors.name3}</div>
 
                         <fieldset className="fieldset border border-input-users">
                             <legend className="label_text_user ml-2">E-mail</legend>
@@ -158,7 +161,7 @@ import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux
                                     />
                                 </td>)}
                         </fieldset>
-
+                        <div className="text-danger">{errors.email}</div>
 
                     </form>
                 </div>
