@@ -1,11 +1,11 @@
 import React from 'react';
-import '../App.css';
+import '../../App.css';
 
-const FildsetPasswordComponent = ({ name, type, htmlFor,  valueC, onChangeC, name2, ids }) => {
+const FildsetNameComponent: React.FC <any> = ({ name, type, htmlFor, placeholder, valueC, onChangeC, name2, required}) => {
 
     return (
 
-      <div className="form-group">
+      <div className="form-group col-md-6">
         <fieldset className="form_border">
           <legend className="label_text">
             {' '}
@@ -13,10 +13,11 @@ const FildsetPasswordComponent = ({ name, type, htmlFor,  valueC, onChangeC, nam
           </legend>
           <input
             type={type}
-            className="form-control input_border form_input "
-            required="required"
+            className="form-control input_border form_input"
+            id="inputPassword4"
+            placeholder={placeholder}
+            required={required}
             pattern="^[A-Za-zА-Яа-яЁё]{4,}"
-            id={ids}
             name={name}
             value={valueC}
             onChange={onChangeC}
@@ -28,4 +29,4 @@ const FildsetPasswordComponent = ({ name, type, htmlFor,  valueC, onChangeC, nam
 
 }
 
-export default FildsetPasswordComponent;
+export default FildsetNameComponent;

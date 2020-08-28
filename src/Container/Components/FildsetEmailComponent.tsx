@@ -1,32 +1,33 @@
 import React from 'react';
-import '../App.css';
+import '../../App.css';
 
-const FildsetNameComponent = ({ name, type, htmlFor, placeholder, valueC, onChangeC, name2}) => {
+const FildsetEmailComponent: React.FC <any> = ({name2, type, htmlFor, placeholder, valueC, onChangeC, name, required }) => {
 
-    return (
+  return (
 
-      <div className="form-group col-md-6">
+      <div className="form-group">
+
         <fieldset className="form_border">
+
           <legend className="label_text">
-            {' '}
             <label htmlFor={htmlFor}>{name2}</label>
           </legend>
           <input
             type={type}
-            className="form-control input_border form_input"
-            id="inputPassword4"
+            className="form-control input_border form_input "
             placeholder={placeholder}
-            required="required"
-            pattern="^[A-Za-zА-Яа-яЁё]{4,}"
+            required={required}
             name={name}
             value={valueC}
             onChange={onChangeC}
           />
+
         </fieldset>
+
       </div>
 
     );
 
 }
 
-export default FildsetNameComponent;
+export default FildsetEmailComponent;

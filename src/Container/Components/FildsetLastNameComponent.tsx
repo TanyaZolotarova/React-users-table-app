@@ -1,11 +1,12 @@
 import React from 'react';
-import '../App.css';
+import '../../App.css';
 
-const FildsetLoginComponent = ({ name, type, htmlFor, placeholder, valueC, onChangeC, name2, ids }) => {
+const FildsetLastNameComponent: React.FC <any> = ({ name, type, htmlFor, placeholder, valueC, onChangeC, name2, ids, required }) => {
 
-  return (
 
-      <div className="form-group">
+    return (
+
+      <div className="form-group ">
         <fieldset className="form_border">
           <legend className="label_text">
             {' '}
@@ -14,15 +15,14 @@ const FildsetLoginComponent = ({ name, type, htmlFor, placeholder, valueC, onCha
           <input
             type={type}
             className="form-control input_border form_input"
-            placeholder={placeholder}
-            required="required"
-            pattern="^[A-Za-zА-Яа-яЁё]{4,}"
             id={ids}
             name={name}
+            placeholder={placeholder}
+            required={required}
+            pattern="^[A-Za-zА-Яа-яЁё]{4,}"
             value={valueC}
             onChange={onChangeC}
           />
-
         </fieldset>
       </div>
 
@@ -30,4 +30,4 @@ const FildsetLoginComponent = ({ name, type, htmlFor, placeholder, valueC, onCha
 
 }
 
-export default FildsetLoginComponent;
+export default FildsetLastNameComponent;

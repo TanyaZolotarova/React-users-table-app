@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css';
+import '../../App.css';
 import {
   HomeIcon, HubotIcon, OctofaceIcon, PeopleIcon, RocketIcon,
 } from '@primer/octicons-react';
@@ -7,7 +7,7 @@ import {
 
 
 
-const HeaderMenuComponent = () => {
+const HeaderMenuComponent: React.FC <any>  = () => {
 
     return (
 

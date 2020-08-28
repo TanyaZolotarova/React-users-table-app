@@ -3,26 +3,22 @@ import './App.css';
 import {
     BrowserRouter as Router, Route, Switch
 } from 'react-router-dom';
-import FormRegisterComponent from './Components/FormRegisterComponent';
-import LoginFormComponents from './Components/LoginFormComponents';
-import HomePageComponent from './SitePageComponents/HomePageComponent';
-import EditUserRowContainer from './SitePageComponents/EdidUserRowComponent';
-import {generateData} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/helpers/users.js";
+import FormRegisterComponent from './Container/FormRegisterContainer';
+import LoginFormContainer from './Container/LoginFormContainer';
+import HomePageComponent from './Container/HomePageContainer';
+import EditUserRowContainer from './Container/EdidUserRowContainer';
+import {generateData} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/helpers/users.tsx";
 import {addUsersData} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
 import {connect} from "react-redux";
 
 
+const App: React.FC <any> = ({addUsersData}) => {
 
-class App extends React.Component {
+    addUsersData(
+        generateData(100)
+    );
 
-    constructor (props) {
-        super(props);
-        this.props.addUsersData(
-            generateData(100)
-        );
-    }
 
-  render() {
     return (
 
       <Router>
@@ -30,7 +26,7 @@ class App extends React.Component {
         <div className="App">
             <Switch>
           <Route exact path="/" component={FormRegisterComponent} />
-          <Route exact path="/login" component={LoginFormComponents} />
+          <Route exact path="/login" component={LoginFormContainer} />
           <Route exact path="/home" component={HomePageComponent}/>
           <Route exact path="/users/:id" component={EditUserRowContainer}/>
           <Route exact path="/users" component={EditUserRowContainer}/>
@@ -41,7 +37,7 @@ class App extends React.Component {
 
 
     );
-  }
+
 }
 
 export default connect(null, { addUsersData })(App)

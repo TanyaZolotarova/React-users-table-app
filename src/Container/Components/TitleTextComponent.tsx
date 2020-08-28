@@ -1,7 +1,7 @@
 import React from 'react';
-import '../App.css';
+import '../../App.css';
 
-const TitleTextComponent = ({text, textH1, textH2}) =>{
+const TitleTextComponent: React.FC <any> = ({text, textH1, textH2}) =>{
 
 return (
 

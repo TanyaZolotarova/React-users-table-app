@@ -1,23 +1,22 @@
 import React from 'react';
 import '../App.css';
-import TitleTextComponent from './TitleTextComponent';
-import FildsetNameComponent from './FildsetNameComponent';
-import FildsetLastNameComponent from './FildsetLastNameComponent';
-import FildsetEmailComponent from './FildsetEmailComponent';
-import FildsetLoginComponent from './FildsetLoginComponent';
-import FildsetPasswordComponent from './FildsetPasswordComponent';
-import BtnComponent from './BtnComponent';
-import ButtonLoginComponent from './ButtonLoginComponent';
-
+import TitleTextComponent from './Components/TitleTextComponent';
+import FildsetNameComponent from './Components/FildsetNameComponent';
+import FildsetLastNameComponent from './Components/FildsetLastNameComponent';
+import FildsetEmailComponent from './Components/FildsetEmailComponent';
+import FildsetLoginComponent from './Components/FildsetLoginComponent';
+import FildsetPasswordComponent from './Components/FildsetPasswordComponent';
+import BtnComponent from './Components/BtnComponent';
+import ButtonLoginComponent from './Components/ButtonLoginComponent';
 import { connect } from 'react-redux';
 import { setErrors, setField, setLoggedIn, clearForm } from '/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/registration.js';
+import IInputs from "./TypeScript/IInputs_interface";
 
 
 
-class FormRegisterComponent extends React.Component {
+class FormRegisterContainer extends React.Component {
 
-
-    fields = {
+    fields: IInputs = {
         username: '',
         email: '',
         surname: '',
@@ -25,29 +24,31 @@ class FormRegisterComponent extends React.Component {
         password:'',
     };
 
+    props:any;
+
     componentDidMount() {
         this.props.clearForm(this.fields);
     };
 
-    handleChange = ({target}) => {
+    handleChange = ({target}: React.ChangeEvent<HTMLTextAreaElement>) => {
         this.props.setField(target)
     };
 
-    submitUserRegistrationForm = (e) => {
+    submitUserRegistrationForm = (e: any) => {
         e.preventDefault();
         const errors = this.validateForm();
         if (Object.keys(errors).length === 0) {
-            this.props.isLogged(this.fields);
+            this.props.setLoggedIn(this.fields);
         } else {
             this.props.setErrors(errors);
         }
     };
 
     validateForm = () => {
-        let fields = this.props.fields;
-        let errors = {};
+        const fields = this.props.fields;
+        const errors: any = {};
 
-        /* eslint-disable no-unused-expressions */
+        /* eslint-disable @typescript-eslint/no-unused-expressions */
 
         !fields["username"]
             ? errors["username"] ="Пожалуйста, введите имя."
@@ -82,7 +83,7 @@ class FormRegisterComponent extends React.Component {
         return errors
     };
 
-    resetForm = (e) => {
+    resetForm = (e: any) => {
         this.props.clearForm(this.fields);
         e.preventDefault()
     };
@@ -91,6 +92,7 @@ class FormRegisterComponent extends React.Component {
     render() {
 
         const {fields, errors} = this.props;
+
         return (
             <div>
 
@@ -175,9 +177,11 @@ class FormRegisterComponent extends React.Component {
                         <BtnComponent
                             btn='buttum flex'
                             nameBtn='Регистрация'
+                            type1 = "submit"
+                            type2 = "reset"
                             btnA='btn btn-primary btn-lg active form_btn bttn'
                             btnB='btn btn-secondary btn-lg active form_buttun bttn'
-                            onClick={this.resetForm}
+                            onSubmit= {this.submitUserRegistrationForm}
                         />
 
 
@@ -187,6 +191,7 @@ class FormRegisterComponent extends React.Component {
                 </div>
                 <ButtonLoginComponent
                     link='Login'
+                    type = 'btn'
                     nameBtnRegister='Уже есть аккаунт? Вход'
                 />
             </div>
@@ -197,6 +202,10 @@ class FormRegisterComponent extends React.Component {
 }
 
 
-const mapStateToProps = state => ({ ...state.registration });
 
-export default connect(mapStateToProps, { setErrors, setField, setLoggedIn, clearForm })(FormRegisterComponent)
+const mapStateToProps = (state: any) => (
+    { ...state.registration }
+);
+
+// @ts-ignore
+export default connect(mapStateToProps, { setErrors, setField, setLoggedIn, clearForm })(RegistrationContainer);

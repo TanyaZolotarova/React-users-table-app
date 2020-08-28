@@ -1,9 +1,8 @@
 import { createSelector } from 'reselect';
 
-export const rowsPerPage = 10;
+export const rowsPerPage = 20;
 
 export const usersBaseSelector = (state) => state.users;
-
 
 export const usersRawSelector = createSelector(
     usersBaseSelector,

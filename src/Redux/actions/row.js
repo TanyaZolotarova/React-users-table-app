@@ -34,13 +34,6 @@ export const editUser = (rows) => {
   }
 }
 
-// export const deleteUser = (data) => {
-//     return {
-//         type: DELETE_USER_ROW,
-//         data
-//     }
-// };
-
 export const addTextInInput = (text) => {
   return {
     type: GET_TEXT,

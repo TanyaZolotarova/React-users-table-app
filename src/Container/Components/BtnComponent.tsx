@@ -1,8 +1,8 @@
 import React from 'react';
-import '../App.css';
+import '../../App.css';
 import { Link } from 'react-router-dom';
 
-const BtnComponent = ({ btn, btnA, btnB, nameBtn, disableB, res, link}) => {
+const BtnComponent: React.FC <any> = ({ btn, btnA, btnB, nameBtn, disableB, onClick, link, type1, type2}) => {
 
     return (
       <div className={btn}>
@@ -12,7 +12,7 @@ const BtnComponent = ({ btn, btnA, btnB, nameBtn, disableB, res, link}) => {
             className={btnA}
             disabled={disableB}
             aria-pressed="true"
-            type="submit"
+            type={type1}
           >
             {nameBtn}
           </button>
@@ -20,8 +20,8 @@ const BtnComponent = ({ btn, btnA, btnB, nameBtn, disableB, res, link}) => {
         <button
           className={btnB}
           aria-pressed="true"
-          type="reset"
-          onClick={res}
+          type={type2}
+          onClick={onClick}
         >
           Сброс
         </button>

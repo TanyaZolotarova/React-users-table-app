@@ -1,95 +1,114 @@
-import React , { useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import '../App.css';
 import { connect } from 'react-redux';
 import {addUsersData, editUser} from '/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js';
-import {generateId} from "/home/tanya/PhpstormProjects/untitled8/src/SitePageComponents/RandomFunctions.js";
+import {generateId} from "/home/tanya/PhpstormProjects/untitled8/src/Functions/RandomFunctions";
 import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/selectors/users.selector.js";
+import IInputs from "./TypeScript/IInputs_interface";
+import IError from "../Container/TypeScript/IError_interface";
 
 
 
 
-    const EditUserRowComponent = ({users, match, editUser}) => {
+const EditUserRowContainer: React.FC <any> = ({users, match, editUser, props}) => {
 
-        const [row, setRow] = useState({
+    const [row, setRow] = useState <IInputs> (
+        {
             id: '',
-            name1: '',
-            name2: '',
-            name3: '',
+            login: '',
+            username: '',
+            surname: '',
             email: '',
-        });
+        }
+    );
 
-        const [rowId, setRowId] = useState( null);
+    const [rowId, setRowId] = useState <null | number> ( null);
 
-        const [errors, setErrors] = useState('');
+    const [errors, setErrors] = useState <IError[]> ([]);
 
-        useEffect(() => {
+    const getError = (name: string) => {
+        const error = errors.find((item: IError) => item.name === name);
+        return error ? error.description : '';
+    };
 
-            const fields = users;
-            const {id} = match.params;
+    useEffect(() => {
+
+        const fields = users;
+        const {id} = match.params;
 
 
-            if (id) {
-                setRow( fields[id] );
-                setRowId(parseInt(id));
+        if (id) {
+            setRow( fields[id] );
+            setRowId(parseInt(id));
+        }
+
+    }, []);
+
+
+    const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const {target} = event;
+        setRow( {...row, [target.name]: target.value}
+        )
+    };
+
+
+    const handleSave = () => {
+
+        const errors = validate();
+
+        if (!errors.length) {
+
+            if (rowId === null) {
+                row.id = generateId();
             }
 
-        }, []);
+            const oldRows = users;
+            const newRows = rowId === null
+                ? [row, ...oldRows] // when adding a new user
+                : oldRows.map((oldRow: IInputs, index: number) => index === rowId ? row : oldRow); // when editing existing user
 
+            editUser(newRows);
+            window.history.back();
+        }  else {
+            setErrors( errors );
+        }} ;
 
-        const handleChange = (event) => {
-            const {target} = event;
-            setRow( {...row, [target.name]: target.value}
-            )
-        };
+    const validate = () => {
+        const errors = [];
 
+        const editNames = new RegExp("^[A-Za-zА-Яа-яЁё]{2,60}");
+        const editEmail = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')
 
-        const handleSave = () => {
+        if (!editNames.exec(row.login!)) {
+            errors.push({
+                name: 'login',
+                description: 'Введите правильный логин.',
+            });
+        }
 
-            const errors = validate();
+        if (!editNames.exec(row.username!)) {
+            errors.push({
+                name: 'username',
+                description: 'Введите правильное имя.',
+            });
+        }
 
-            if (Object.keys(errors).length === 0) {
+        if (!editNames.exec(row.surname!)) {
+            errors.push({
+                name: 'surname',
+                description: 'Введите правильную фамилию.',
+            });
+        }
 
-                if (rowId === null) {
-                    row.id = generateId();
-                }
+        if (!editEmail.exec(row.email!)) {
+            errors.push({
+                name: 'email',
+                description: 'Введите правильный e-mail.',
+            });
+        }
 
-                const oldRows = users;
-                const newRows = rowId === null
-                    ? [row, ...oldRows] // when adding a new user
-                    : oldRows.map((oldRow, index) => index === rowId ? row : oldRow); // when editing existing user
-
-                editUser(newRows);
-                window.history.back();
-            }  else {
-                setErrors( errors );
-            }} ;
-
-        const validate = () => {
-            let rows = row;
-            let errors = {};
-
-            const editNames = new RegExp("^[A-Za-zА-Яа-яЁё]{4,60}");
-            const editEmail = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')
-
-            if (!editNames.exec(rows.name1)){
-                errors.name1 = "Введите правильный логин.";
-            }
-
-            if (!editNames.exec(rows.name2)) {
-                errors.name2 = "Введите правильное имя.";
-            }
-
-            if (!editNames.exec(rows.name3)) {
-                errors.name3 = "Введите правильную фамилию.";
-            }
-
-            if (!editEmail.exec(rows.email)) {
-                errors.email = "Введите правильный e-mail.";
-            }
-
-            return errors
-        };
-
+        return errors;
+    };
 
         return (
             <div className='fon_page'>
@@ -113,12 +132,12 @@ import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux
                                     <input
                                         className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
-                                        onChange={handleChange}
-                                        value={row[name]}
+                                        onChange={props.handleChange}
+                                        value={row.login}
                                     />
                                 </td>)}
                         </fieldset>
-                        <div className="text-danger">{errors.name1}</div>
+                        <div className="text-danger">{getError('login')}</div>
 
                         <fieldset className="fieldset border border-input-users">
                             <legend className="label_text_user ml-2">Имя</legend>
@@ -127,12 +146,12 @@ import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux
                                     <input
                                         className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
-                                        onChange={handleChange}
-                                        value={row[name]}
+                                        onChange={props.handleChange}
+                                        value={row.username}
                                     />
                                 </td>)}
                         </fieldset>
-                        <div className="text-danger">{errors.name2}</div>
+                        <div className="text-danger">{getError('username')}</div>
 
                         <fieldset className="fieldset border border-input-users">
                             <legend className="label_text_user ml-2">Фамилия</legend>
@@ -141,13 +160,13 @@ import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux
                                     <input
                                         className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
-                                        onChange={handleChange}
-                                        value={row[name]}
+                                        onChange={props.handleChange}
+                                        value={row.surname}
                                     />
                                 </td>)}
 
                         </fieldset>
-                        <div className="text-danger">{errors.name3}</div>
+                        <div className="text-danger">{getError('surname')}</div>
 
                         <fieldset className="fieldset border border-input-users">
                             <legend className="label_text_user ml-2">E-mail</legend>
@@ -156,12 +175,12 @@ import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux
                                     <input
                                         className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
-                                        onChange={handleChange}
-                                        value={row[name]}
-                                    />
+                                        onChange={props.handleChange}
+                                        value={row.email} />
+
                                 </td>)}
                         </fieldset>
-                        <div className="text-danger">{errors.email}</div>
+                        <div className="text-danger">{getError('email')}</div>
 
                     </form>
                 </div>
@@ -189,11 +208,11 @@ import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux
 }
 
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: any) => {
     return {
         users: usersRawSelector(state),
     };
 };
 
-export default connect(mapStateToProps, { addUsersData, editUser })(EditUserRowComponent)
+export default connect(mapStateToProps, { addUsersData, editUser })(EditUserRowContainer)
 

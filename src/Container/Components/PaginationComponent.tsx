@@ -1,8 +1,9 @@
 import React from 'react';
 
-const PaginationComponent = ({ setPage, pagesCount, currentPage, }) =>{
+const PaginationComponent: React.FC <any> = ({ setPage, pagesCount, currentPage, }) =>{
 
-    const pageNumbers = [...Array(pagesCount)].map((item, index) => index + 1);
+    const pageNumbers: Array<number> = [...Array(pagesCount)].map((item, index: number) => index + 1);
+
 
     return (
         <ul className="pagination pg-blue justify-content-center ">
@@ -11,7 +12,7 @@ const PaginationComponent = ({ setPage, pagesCount, currentPage, }) =>{
             </li>
 
             {
-                pageNumbers.map((number) => (
+                pageNumbers.map((number: number) => (
                     <li className={`page-item ${currentPage === number ? 'active' : ''}`} key={number}>
                         <a className="page-link" onClick={() => setPage(number)}>{number}</a>
                     </li>
