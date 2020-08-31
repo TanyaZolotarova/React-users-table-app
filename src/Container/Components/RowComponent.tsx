@@ -2,19 +2,26 @@ import React from 'react';
 import {NavLink} from "react-router-dom";
 import {connect} from "react-redux";
 import '../../App.css';
-import { editUser} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
+import { editUser} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row";
 import { TrashIcon } from '@primer/octicons-react';
-import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/selectors/users.selector.js";
+import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/selectors/users.selector";
+import {RowComponentInterface} from "../TypeScript/Interfaces/RowComponentInterface";
+import { ReactElement} from "react";
+import IEditInterface from "/home/tanya/PhpstormProjects/untitled8/src/Container/TypeScript/Interfaces/IEditInterface";
+import {RootReducerType} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/reducers/rootReducers";
 
 
 
-const RowComponent: React.FC <any> = ({ row, index, users, editUser }) => {
+const RowComponent = (props: RowComponentInterface): ReactElement => {
+    const {row, index, editUser, users} = props;
+
 
     const handleDelete = (): void => {
-        const rows: string[] = [...users];
+        const rows: IEditInterface[] = [...users];
         rows.splice(index, 1);
         editUser(rows);
     };
+
 
     return (
         <tr>
@@ -31,7 +38,7 @@ const RowComponent: React.FC <any> = ({ row, index, users, editUser }) => {
                 </span>
             </NavLink>
 
-                <button onClick={handleDelete}  className='btn btn-sm btn-dark rounded ml-2'>
+                <button onClick={() => handleDelete()}  className='btn btn-sm btn-dark rounded ml-2'>
                     {/*// onClick={console.log(this.fields.length)}>*/}
                     <span className="material-icons icon-edit text-light">
                   <TrashIcon size={18} />
@@ -42,14 +49,14 @@ const RowComponent: React.FC <any> = ({ row, index, users, editUser }) => {
 
 }
 
-const mapStateToProps = (state: any) => {
+
+const mapStateToProps = (state: RootReducerType) => {
     return {
         users: usersRawSelector(state),
     };
 };
 
 export default connect(mapStateToProps, { editUser })(RowComponent)
-
 
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import RowComponent from '/home/tanya/PhpstormProjects/untitled8/src/Container/Components/RowComponent';
+import RowComponent from './RowComponent';
 import PaginationComponent from "./PaginationComponent";
 import {connect} from 'react-redux';
 import {
@@ -7,15 +7,22 @@ import {
     updateFilteredRows,
     updatePage,
     addUsersData
-} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
+} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row";
 import {NavLink} from "react-router-dom";
 import {
     currentPageSelector, filterTextSelector, getPagesCount, usersPerPageSelector, usersRawSelector,
-} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/selectors/users.selector.js";
+} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/selectors/users.selector";
 import {PlusIcon, PersonIcon} from '@primer/octicons-react';
+import {ReactElement} from "react";
+import {TableComponentInterface} from "../TypeScript/Interfaces/TableComponentInterface";
+import {RootReducerType} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/reducers/rootReducers";
 
 
-const TableComponent: React.FC <any> = ({updatePage, addTextInInput, result, pageCount, currentPage}) => {
+
+
+const TableComponent = (props: TableComponentInterface): ReactElement => {
+    const {updatePage, addTextInInput, result, pageCount, currentPage} = props;
+
 
     const setPage = (number: number): void => {
         updatePage(number);
@@ -23,9 +30,9 @@ const TableComponent: React.FC <any> = ({updatePage, addTextInInput, result, pag
 
     const searchFieldChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {value: searchPhrase} = event.target;
+
         addTextInInput(searchPhrase);
     };
-
     return (
         <>
             <section className={"main-marg"}>
@@ -59,7 +66,7 @@ const TableComponent: React.FC <any> = ({updatePage, addTextInInput, result, pag
 
                         {
                             Object.values(result)
-                                .map((row: any, index: number) => <RowComponent key={index} row={row} index={row.idx} />)
+                                .map((row: any, index: number) => <RowComponent key={index} row={row} index={row.idx}/>)
                         }
 
                         </tbody>
@@ -79,7 +86,7 @@ const TableComponent: React.FC <any> = ({updatePage, addTextInInput, result, pag
     );
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootReducerType) => {
 
     return {
         users: usersRawSelector(state),

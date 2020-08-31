@@ -1,18 +1,33 @@
-import React, { useEffect, useState} from 'react';
+import  React, { ChangeEvent, SyntheticEvent, useEffect, useState} from 'react';
 import '../App.css';
 import { connect } from 'react-redux';
-import {addUsersData, editUser} from '/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js';
+import {addUsersData, editUser} from '/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row';
 import {generateId} from "/home/tanya/PhpstormProjects/untitled8/src/Functions/RandomFunctions";
-import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/selectors/users.selector.js";
-import IInputs from "./TypeScript/IInputs_interface";
-import IError from "../Container/TypeScript/IError_interface";
+import {usersRawSelector} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/selectors/users.selector";
+import IError from "./TypeScript/Interfaces/IError_interface";
+import IEditInterface from "./TypeScript/Interfaces/IEditInterface";
+import {RootReducerType} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/reducers/rootReducers";
+import BtnComponent from "./Components/BtnComponent";
 
 
 
 
-const EditUserRowContainer: React.FC <any> = ({users, match, editUser, props}) => {
+interface IEditUserRowContainer {
+    users: IEditInterface[],
+    match: MatchParams,
+    editUser: (rows: IEditInterface[]) => void,
 
-    const [row, setRow] = useState <IInputs> (
+}
+
+interface MatchParams {
+    params: any,
+}
+
+
+const EditUserRowContainer= (props: IEditUserRowContainer) => {
+    const {users, match, editUser} = props;
+
+    const [row, setRow] = useState <IEditInterface> (
         {
             id: '',
             login: '',
@@ -35,7 +50,6 @@ const EditUserRowContainer: React.FC <any> = ({users, match, editUser, props}) =
 
         const fields = users;
         const {id} = match.params;
-
 
         if (id) {
             setRow( fields[id] );
@@ -65,7 +79,7 @@ const EditUserRowContainer: React.FC <any> = ({users, match, editUser, props}) =
             const oldRows = users;
             const newRows = rowId === null
                 ? [row, ...oldRows] // when adding a new user
-                : oldRows.map((oldRow: IInputs, index: number) => index === rowId ? row : oldRow); // when editing existing user
+                : oldRows.map((oldRow: IEditInterface, index: number) => index === rowId ? row : oldRow); // when editing existing user
 
             editUser(newRows);
             window.history.back();
@@ -73,8 +87,8 @@ const EditUserRowContainer: React.FC <any> = ({users, match, editUser, props}) =
             setErrors( errors );
         }} ;
 
-    const validate = () => {
-        const errors = [];
+    const validate = (): IError[] => {
+        const errors: IError[] = [];
 
         const editNames = new RegExp("^[A-Za-zА-Яа-яЁё]{2,60}");
         const editEmail = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')
@@ -107,9 +121,9 @@ const EditUserRowContainer: React.FC <any> = ({users, match, editUser, props}) =
             });
         }
 
+
         return errors;
     };
-
         return (
             <div className='fon_page'>
                 <div className={'container form_block'}>
@@ -132,7 +146,8 @@ const EditUserRowContainer: React.FC <any> = ({users, match, editUser, props}) =
                                     <input
                                         className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
-                                        onChange={props.handleChange}
+                                        // @ts-ignore
+                                        onChange={handleChange}
                                         value={row.login}
                                     />
                                 </td>)}
@@ -146,7 +161,8 @@ const EditUserRowContainer: React.FC <any> = ({users, match, editUser, props}) =
                                     <input
                                         className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
-                                        onChange={props.handleChange}
+                                        // @ts-ignore
+                                        onChange={handleChange}
                                         value={row.username}
                                     />
                                 </td>)}
@@ -160,7 +176,8 @@ const EditUserRowContainer: React.FC <any> = ({users, match, editUser, props}) =
                                     <input
                                         className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
-                                        onChange={props.handleChange}
+                                        // @ts-ignore
+                                        onChange={handleChange}
                                         value={row.surname}
                                     />
                                 </td>)}
@@ -175,7 +192,8 @@ const EditUserRowContainer: React.FC <any> = ({users, match, editUser, props}) =
                                     <input
                                         className="form-control form-control_user registrationField-input input_border form_input bg-dark "
                                         name={name}
-                                        onChange={props.handleChange}
+                                        // @ts-ignore
+                                        onChange={handleChange}
                                         value={row.email} />
 
                                 </td>)}
@@ -208,7 +226,7 @@ const EditUserRowContainer: React.FC <any> = ({users, match, editUser, props}) =
 }
 
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootReducerType) => {
     return {
         users: usersRawSelector(state),
     };

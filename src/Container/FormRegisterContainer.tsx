@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FormEvent, ReactNode}  from 'react';
 import '../App.css';
 import TitleTextComponent from './Components/TitleTextComponent';
 import FildsetNameComponent from './Components/FildsetNameComponent';
@@ -9,12 +9,13 @@ import FildsetPasswordComponent from './Components/FildsetPasswordComponent';
 import BtnComponent from './Components/BtnComponent';
 import ButtonLoginComponent from './Components/ButtonLoginComponent';
 import { connect } from 'react-redux';
-import { setErrors, setField, setLoggedIn, clearForm } from '/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/registration.js';
-import IInputs from "./TypeScript/IInputs_interface";
-
+import { setErrors, setField, setLoggedIn, clearForm } from '/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/registration';
+import IInputs from "./TypeScript/Interfaces/IInputs_interface";
+import {RootReducerType} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/reducers/rootReducers";
 
 
 class FormRegisterContainer extends React.Component {
+
 
     fields: IInputs = {
         username: '',
@@ -30,11 +31,11 @@ class FormRegisterContainer extends React.Component {
         this.props.clearForm(this.fields);
     };
 
-    handleChange = ({target}: React.ChangeEvent<HTMLTextAreaElement>) => {
+    private handleChange = ({target}: React.ChangeEvent<HTMLInputElement>) => {
         this.props.setField(target)
     };
 
-    submitUserRegistrationForm = (e: any) => {
+    private submitUserRegistrationForm = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
         const errors = this.validateForm();
         if (Object.keys(errors).length === 0) {
@@ -44,7 +45,7 @@ class FormRegisterContainer extends React.Component {
         }
     };
 
-    validateForm = () => {
+    private validateForm = () => {
         const fields = this.props.fields;
         const errors: any = {};
 
@@ -83,16 +84,14 @@ class FormRegisterContainer extends React.Component {
         return errors
     };
 
-    resetForm = (e: any) => {
+    private resetForm = (e: React.MouseEvent<HTMLElement>): void => {
         this.props.clearForm(this.fields);
         e.preventDefault()
     };
 
-
-    render() {
+    render(): ReactNode {
 
         const {fields, errors} = this.props;
-
         return (
             <div>
 
@@ -100,7 +99,7 @@ class FormRegisterContainer extends React.Component {
 
                     <form className={'bg-white'} autoComplete="off"
                           id = "form1"
-                          onSubmit= {this.submitUserRegistrationForm}>
+                     >
 
                         <TitleTextComponent
                             text='title_block'
@@ -110,13 +109,14 @@ class FormRegisterContainer extends React.Component {
                         />
 
                         <div className="form-row">
+
                             <FildsetNameComponent
                                 name2='Имя'
                                 type='text'
-                                htmlFor='firstName'
                                 placeholder='Имя'
                                 value={fields.username}
                                 onChange={this.handleChange}
+                                name='Name'
                             />
 
                             <div className="text-danger ml-3 errorMsg">{errors.username}</div>
@@ -124,10 +124,10 @@ class FormRegisterContainer extends React.Component {
                             <FildsetLastNameComponent
                                 name2='Фамилия'
                                 type='text'
-                                htmlFor='lastName'
                                 placeholder='Фамилия'
                                 value={fields.surname}
                                 onChange={this.handleChange}
+                                name='lastName'
                             />
 
                             <div className="text-danger">{errors.surname}</div>
@@ -137,7 +137,6 @@ class FormRegisterContainer extends React.Component {
                         <FildsetEmailComponent
                             name2='Email'
                             type='text'
-                            htmlFor='inputEmail4'
                             placeholder='Email'
                             value={fields.email}
                             onChange={this.handleChange}
@@ -148,26 +147,22 @@ class FormRegisterContainer extends React.Component {
 
 
                         <FildsetLoginComponent
-
                             name2='Логин'
                             type='text'
-                            htmlFor='username'
                             placeholder='Логин'
                             value={fields.login}
                             onChange={this.handleChange}
+                            name ='login'
                         />
 
                         <div className="text-danger">{errors.login}</div>
 
 
                         <FildsetPasswordComponent
-
                             name2='Пароль'
                             type='password'
-                            htmlFor='inputPassword4'
                             value={fields.password}
                             onChange={this.handleChange}
-                            ids='password'
                             name='password'
                         />
 
@@ -181,7 +176,9 @@ class FormRegisterContainer extends React.Component {
                             type2 = "reset"
                             btnA='btn btn-primary btn-lg active form_btn bttn'
                             btnB='btn btn-secondary btn-lg active form_buttun bttn'
+                            // @ts-ignore
                             onSubmit= {this.submitUserRegistrationForm}
+                            onClick={this.resetForm}
                         />
 
 
@@ -191,6 +188,7 @@ class FormRegisterContainer extends React.Component {
                 </div>
                 <ButtonLoginComponent
                     link='Login'
+                    // @ts-ignore
                     type = 'btn'
                     nameBtnRegister='Уже есть аккаунт? Вход'
                 />
@@ -203,9 +201,9 @@ class FormRegisterContainer extends React.Component {
 
 
 
-const mapStateToProps = (state: any) => (
+const mapStateToProps = (state: RootReducerType) => (
     { ...state.registration }
 );
 
 // @ts-ignore
-export default connect(mapStateToProps, { setErrors, setField, setLoggedIn, clearForm })(RegistrationContainer);
+export default connect(mapStateToProps, { setErrors, setField, setLoggedIn, clearForm })(FormRegisterContainer);

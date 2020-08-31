@@ -1,32 +1,37 @@
-import React from 'react';
+import * as React from 'react';
 import '../../App.css';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import {BtnComponentInterface} from "../TypeScript/Interfaces/BtnComponentInterface";
+ import {ReactElement} from "react";
 
-const BtnComponent: React.FC <any> = ({ btn, btnA, btnB, nameBtn, disableB, onClick, link, type1, type2}) => {
+
+const BtnComponent = (props: BtnComponentInterface): ReactElement => {
+    const {btn, btnA, btnB, nameBtn, onClick, link, type1, type2} = props;
 
     return (
-      <div className={btn}>
+        <div className={btn}>
 
-        <Link to={link}>
-          <button
-            className={btnA}
-            disabled={disableB}
-            aria-pressed="true"
-            type={type1}
-          >
-            {nameBtn}
-          </button>
-        </Link>
-        <button
-          className={btnB}
-          aria-pressed="true"
-          type={type2}
-          onClick={onClick}
-        >
-          Сброс
-        </button>
+            <Link to={link}>
+                <button
+                    className={btnA}
 
-      </div>
+                    aria-pressed="true"
+                    type={type1}
+                >
+                    {nameBtn}
+                </button>
+            </Link>
+            <button
+                className={btnB}
+                aria-pressed="true"
+                type={type2}
+                onClick={onClick}
+
+            >
+                Сброс
+            </button>
+
+        </div>
     )
 }
 

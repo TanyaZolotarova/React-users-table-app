@@ -7,8 +7,8 @@ import FormRegisterComponent from './Container/FormRegisterContainer';
 import LoginFormContainer from './Container/LoginFormContainer';
 import HomePageComponent from './Container/HomePageContainer';
 import EditUserRowContainer from './Container/EdidUserRowContainer';
-import {generateData} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/helpers/users.tsx";
-import {addUsersData} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row.js";
+import {generateData} from '/home/tanya/PhpstormProjects/untitled8/src/Redux/helpers/users';
+import {addUsersData} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/row";
 import {connect} from "react-redux";
 
 
@@ -40,4 +40,6 @@ const App: React.FC <any> = ({addUsersData}) => {
 
 }
 
+
+//TS-ignor
 export default connect(null, { addUsersData })(App)

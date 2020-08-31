@@ -5,10 +5,14 @@ import TitleTextComponent from './Components/TitleTextComponent';
 import BtnComponent from './Components/BtnComponent';
 import ButtonLoginComponent from './Components/ButtonLoginComponent';
 import FildsetEmailComponent from './Components/FildsetEmailComponent';
-import {clearForm, setErrors, setField, setLoggedIn} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/registration.js";
-import IInputs from "./TypeScript/IInputs_interface";
-import IError from './TypeScript/IError_interface';
+import {clearForm, setErrors, setField, setLoggedIn} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/actions/registration";
+import IInputs from "./TypeScript/Interfaces/IInputs_interface";
+import IError from './TypeScript/Interfaces/IError_interface';
 import { connect } from 'react-redux';
+import {RootReducerType} from "/home/tanya/PhpstormProjects/untitled8/src/Redux/reducers/rootReducers";
+
+
+
 
 
 class LoginFormContainer extends React.Component {
@@ -90,7 +94,7 @@ class LoginFormContainer extends React.Component {
                     <form className={'bg-white'}
                           onSubmit={this.submitRegistrationForm}
                     >
-
+                        {/*// @ts-ignore*/}
                         <TitleTextComponent
                             text='title_block'
                             textH1='Вход'
@@ -99,14 +103,12 @@ class LoginFormContainer extends React.Component {
 
 
                         <FildsetEmailComponent
-
                             name2='Email'
                             type='text'
-                            htmlFor='inputEmail4'
                             placeholder='Email'
                             value={fields.login}
+                            // @ts-ignore
                             onChange={this.handleChange}
-                            ids='email'
                             name='email'
                         />
                         <div className="text-danger">{this.getError("email")}</div>
@@ -117,6 +119,7 @@ class LoginFormContainer extends React.Component {
                             type='password'
                             htmlFor='inputPassword4'
                             value={fields.password}
+                            // @ts-ignore
                             onChange={this.handleChange}
                             ids='password'
                             name='password'
@@ -132,6 +135,7 @@ class LoginFormContainer extends React.Component {
                                 link='Home'
                                 btnA='btn btn-primary btn-lg active form_btn bttn'
                                 btnB='btn btn-secondary btn-lg active form_buttun bttn'
+                                // @ts-ignore
                                 onSubmit= {this.submitRegistrationForm}
 
 
@@ -143,6 +147,7 @@ class LoginFormContainer extends React.Component {
                 </div>
                 <ButtonLoginComponent
                     link='/'
+                    // @ts-ignore
                     type = 'btn'
                     nameBtnRegister='Нет аккаунта? Вернуться в регистрацию'
                 />
@@ -155,9 +160,9 @@ class LoginFormContainer extends React.Component {
 
 
 
-const mapStateToProps = (state: any) => ({
+
+const mapStateToProps = (state: RootReducerType) => ({
     ...state.registration
 });
 
-export default connect(mapStateToProps, {setErrors, setField, setLoggedIn, clearForm})
-(LoginFormContainer);
+export default connect(mapStateToProps, {setErrors, setField, setLoggedIn, clearForm}) (LoginFormContainer);

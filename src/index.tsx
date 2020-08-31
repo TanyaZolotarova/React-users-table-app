@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import './index.css';
 import * as serviceWorker from '/home/tanya/PhpstormProjects/untitled8/src/serviceWorker.js';
 import { createStore } from 'redux';
-import { rootReducers } from '/home/tanya/PhpstormProjects/untitled8/src/Redux/reducers/rootReducers.js';
+import { rootReducers } from '/home/tanya/PhpstormProjects/untitled8/src/Redux/reducers/rootReducers';
 import { Provider } from 'react-redux';
 import App from './App';
 import { composeWithDevTools } from 'redux-devtools-extension';

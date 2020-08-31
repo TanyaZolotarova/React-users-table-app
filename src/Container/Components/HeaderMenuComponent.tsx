@@ -3,11 +3,12 @@ import '../../App.css';
 import {
   HomeIcon, HubotIcon, OctofaceIcon, PeopleIcon, RocketIcon,
 } from '@primer/octicons-react';
+import { ReactElement} from "react";
 
 
 
 
-const HeaderMenuComponent: React.FC <any>  = () => {
+const HeaderMenuComponent = (): ReactElement  => {
 
     return (
 

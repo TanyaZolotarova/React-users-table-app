@@ -1,8 +1,9 @@
-import {generateEmail, generateId, generateName} from "/home/tanya/PhpstormProjects/untitled8/src/Functions/RandomFunctions.tsx";
+import {generateEmail, generateId, generateName} from "/home/tanya/PhpstormProjects/untitled8/src/Functions/RandomFunctions";
+import IInputs from "/home/tanya/PhpstormProjects/untitled8/src/Container/TypeScript/Interfaces/IInputs_interface";
 
 export const generateData = (amountOfRows: number = 100) => {
 
-    const result: Array <any> = [];
+    const result: Array <IInputs> = [];
 
     for (let i = 0; i < amountOfRows; i++) {
         result.push({
